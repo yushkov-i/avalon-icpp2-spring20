@@ -4,8 +4,8 @@ using namespace std;
 
 int main()
 {
-	cout << "hello world!"<< endl;
-
+	cout << "Hello world!"<< endl;
+	cout << "And hello to you!" << endl;
 
 
 }
