@@ -32,4 +32,13 @@ int main()
   int i;
   cin << i;
   userMark=  static_cast<int>(i) << endl;
+  Student student;
+  student.Id=GetRandomValue(1, 1000);
+  student.Mark=static_cast<Grade>(GetRandomValue(1, 5))
+    int tempetRandomValue(3,6);
+  for(int i=0; i<temp; i++)
+  {
+    student.Name[i]=GetRandomValur('a', 'z');
+  }
+  
 }
