@@ -13,7 +13,7 @@ int main()
 		cin >> isbn;
 		isbn1 = isbn;
 		end = isbn % 10;
-		isbn = isbn / 10;
+		isbn /= 10;
 		isbn2 = isbn * 10;
 		do {
 			number = isbn % 10;
