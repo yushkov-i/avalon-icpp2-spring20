@@ -4,12 +4,12 @@ using namespace std;
 
 int main()
 {
-    char isbn[13];
-    int summ;
     int N;
     cout << "N = ";
     cin >> N ;
     for (int i = 0; i < N; i ++) {
+        char isbn[13];
+        int summ=0;
         for (int g = 0 ; g < 14; g ++){
             cin >> isbn[g];
         }
