@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    char isbn[13];
+    int summ;
+    int N;
+    cout << "N = ";
+    cin >> N ;
+    for (int i = 0; i < N; i ++) {
+        for (int g = 0 ; g < 14; g ++){
+            cin >> isbn[g];
+        }
+        for (int g = 0 ; g < 113; g ++){
+            summ+=isbn[g];
+        }
+        if(10-(summ/10)==isbn[12]){
+            cout << "valid" <<endl;
+            
+        }
+            else{
+                cout << "invalid"<< endl;
+        }
+    }
+
+    return 0;
+}
