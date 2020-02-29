@@ -1,0 +1,23 @@
+#include <iostream>
+#include <limits>
+using namespace std;
+int main()
+{
+	setlocale(LC_CTYPE, "rus");
+	cout << "Тип переменной\t\t|\tРазмер,\t|\t\t\tЗначение\t\t|\tКоличество" << endl;
+	cout << "\t\t\t|\tбайт\t|\tМинимальное\t|\tМаксимальное\t|\tзначимых бит" << endl;
+	cout << "bool\t\t\t|\t1\t|\tfalse\t\t|\ttrue\t\t|\t1" << endl;
+	cout << "unsigned short\t\t|\t2\t|\t0\t\t|\t65535\t\t|\t16 " << endl;
+
+	cout << "short\t\t\t|\t2\t|\t-32767\t\t|\t32767\t\t|" << endl;
+
+	cout << "unsigned int\t\t|\t2\t|\t0\t\t|\t4294967295\t|" << endl;
+	cout << "int\t\t\t|\t2\t|\t-2147483647\t|\t2147483647\t|" << endl;
+	cout << "unsigned long\t\t|\t4\t|\t0\t\t|\t4294967295\t|" << endl;
+	cout << "long\t\t\t|\t4\t|\t-2147483647\t|\t2147483647\t|" << endl;
+	cout << "unsigned long long\t|\t8\t|\t0\t\t|18446744073709551615\t|" << endl;
+	cout << "long long\t\t|\t8\t|-9223372036854775807\t|9223372036854775807\t|" << endl;
+	cout << "char\t\t\t|\t1\t|\t\t\t|\t\t\t|" << endl;
+	cout << "float\t\t\t|\t4\t|\t1.17549e-38\t|\t3.40282e+38\t|" << endl;
+	cout << "double\t\t\t|\t8\t|\t2.22507e-308\t|\t1.79769e+308\t|" << endl;
+	   	 }
