@@ -20,29 +20,138 @@ int main() {
 	if (count3 < count4) moda = 4;
 	if (count4 < count5) moda = 5;
 	cout << "Moda = " << moda << endl;
-	while (count < index/4){
+	do{
 		count = count1;
-		if (count > 25) {
+		if (count > index/4) {
 			mark25 = 1;
 			break;
 		}
-		if (count == 25) {
+		if (count == index/4) {
 			mark25 = 2;
 			break;
 		}
 		count += count2;
-		if (count > 25) {
+		if (count > index/4) {
 			mark25 = 2;
 			break;
 		}
-		if (count == 25) {
+		if (count == index/4) {
 			mark25 = 3;
 			break;
 		}
 		count += count3;
-		if (count > 25) {
-			mark25 = 2;
+		if (count > index/4) {
+			mark25 = 3;
+			break;
+		}
+		if (count == index/4) {
+			mark25 = 4;
+			break;
+		}
+		count += count4;
+		if (count > index/4) {
+			mark25 = 4;
+			break;
+		}
+		if (count == index/4) {
+			mark25 = 5;
+			break;
+		}
+		count += count5;
+		if (count >= index/4) {
+			mark25 = 5;
 			break;
 		}
 	}
+	count = 0;
+	cout << "To be better then 25% you must get" << mark25;
+	do{
+		count = count1;
+		if (count > index/2) {
+			mark50 = 1;
+			break;
+		}
+		if (count == index/2) {
+			mark50 = 2;
+			break;
+		}
+		count += count2;
+		if (count > index/2) {
+			mark50 = 2;
+			break;
+		}
+		if (count == index/2) {
+			mark50 = 3;
+			break;
+		}
+		count += count3;
+		if (count > index/2) {
+			mark50 = 3;
+			break;
+		}
+		if (count == index/2) {
+			mark50 = 4;
+			break;
+		}
+		count += count4;
+		if (count > index/2) {
+			mark50 = 4;
+			break;
+		}
+		if (count == index/2) {
+			mark50 = 5;
+			break;
+		}
+		count += count5;
+		if (count >= index/2) {
+			mark50 = 5;
+			break;
+		}
+	}
+	count = 0;
+	cout << "To be better then 50% you must get" << mark50;
+	do{
+		count = count1;
+		if (count > index/3 * 4) {
+			mark75 = 1;
+			break;
+		}
+		if (count == index/3 * 4) {
+			mark75 = 2;
+			break;
+		}
+		count += count2;
+		if (count > index/3 * 4) {
+			mark75 = 2;
+			break;
+		}
+		if (count == index/3 * 4) {
+			mark75 = 3;
+			break;
+		}
+		count += count3;
+		if (count > index/3 * 4) {
+			mark75 = 3;
+			break;
+		}
+		if (count == index/3 * 4) {
+			mark75 = 4;
+			break;
+		}
+		count += count4;
+		if (count > index/3 * 4) {
+			mark75 = 4;
+			break;
+		}
+		if (count == index/3 * 4) {
+			mark75 = 5;
+			break;
+		}
+		count += count5;
+		if (count >= index/3 * 4) {
+			mark75 = 5;
+			break;
+		}
+	}
+	cout << "To be better then 75% you must get" << mark75;
 }
