@@ -1,0 +1,155 @@
+#include <iostream>
+#include "Header.h"
+#include <cstdlib>
+
+using namespace std;
+using namespace ext;
+
+enum Grade
+{
+	F = 1,   // íåÿâêà
+	D = 2,  // íåóäîâëåòâîðèòåëüíî
+	C = 3,  // óäîâëåòâîðèòåëüíî
+	B = 4,  // õîðîøî
+	A = 5,  // îòëè÷íî      
+};
+
+struct Student {
+	int Id;
+	Grade Mark;
+	char Name[7];
+};
+int main() 
+{
+	setlocale(LC_ALL, "RUS");
+	short Temp;
+	Temp = 0;
+	Student Students[100];
+	for (int i = 0; i < 100; i++) //заполнение массива
+	{
+		Students[i].Id = GetRandomValue(1, 1000);
+		Students[i].Mark = static_cast<Grade>(GetRandomValue(1, 5));
+		Temp = GetRandomValue(3, 6);
+		for (int j = 0; j < Temp; j++) 
+		{
+			Students[i].Name[j] = GetRandomValue('a', 'z');
+		}
+		if (Temp != 6) 
+		{
+			for (int j = Temp; j < (Temp + 6 - Temp); j++) 
+			{
+				Students[i].Name[j] = '\0';
+			}
+		}
+		Students[i].Name[Temp] = '\0';
+		Temp = 0;
+	};
+
+	for (int i = 0; i < 100; i++)//сортировка оценок
+	{
+		for (int j = 0; j < 100 - 1 - i; j++)
+		{
+			if (static_cast<int>(Students[j].Mark) > static_cast<int>(Students[j + 1].Mark)) 
+			{
+				Grade Swap = Students[j].Mark;
+				Students[j].Mark = Students[j + 1].Mark;
+				Students[j + 1].Mark = Swap;
+
+			}
+		}
+	}
+	int MassivSchet[5] = {};
+	Grade SchetMark = Students[0].Mark;
+	for (int i = 0; i < 100; i++) 
+	{
+		if (SchetMark == Students[i].Mark) 
+		{
+			MassivSchet[static_cast<int>(SchetMark) - 1]++;
+		}
+		else 
+		{
+			SchetMark = static_cast<Grade>(static_cast<int>(SchetMark + 1));
+			MassivSchet[static_cast<int>(SchetMark) - 1]++;
+		}
+	}
+	int Summa = 0;
+	// для 25%
+	if (MassivSchet[4] > 75) 
+	{
+		cout << "Вы несможете стать лучше 25% учащихся" << endl;
+	}
+	else
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			Summa = Summa + MassivSchet[i];
+			if (Summa >= 25) 
+			{
+				cout << "Вам нужно получить оценку : " << static_cast<Grade>(i + 2) << ", чтобы быть лучше 25%." << endl;
+				break;
+			}
+		}
+	}
+	Summa = 0;
+	// для 50%
+	if (MassivSchet[4] > 50) 
+	{
+		cout << "Вы несможете стать лучше 50% учащихся" << endl;
+	}
+	else 
+	{
+		for (int i = 0; i < 5; i++) 
+		{
+			Summa = Summa + MassivSchet[i];
+			if (Summa >= 50)
+			{
+				cout << "Вам нужно получить оценку: " << static_cast<Grade>(i + 2) << ",чтобы быть лучше 50%." << endl;
+				break;
+			}
+		}
+	}
+	Summa = 0;
+	// для 75%
+	if (MassivSchet[4] > 25) 
+	{
+		cout << "Вы несможете стать лучше 75% учащихся" << endl;
+	}
+	else 
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			Summa = Summa + MassivSchet[i];
+			if (Summa >= 75) 
+			{
+				cout << "Вам нужно получить оценку : " << static_cast<Grade>(i + 2) << ", чтобы быть лучше 75%." << endl;
+				break;
+			}
+		}
+	}
+	int maximum = max(MassivSchet[4], max(max(MassivSchet[0], MassivSchet[1]), max(MassivSchet[2], MassivSchet[3])));
+		if(maximum==MassivSchet[4])
+		{
+	cout << "Мода=5" << endl;
+		}
+		if (maximum == MassivSchet[3])
+		{
+			cout << "Мода=4" << endl;
+		}
+
+		if (maximum == MassivSchet[2])
+		{
+			cout << "Мода=3" << endl;
+		}
+
+		if (maximum == MassivSchet[1])
+		{
+			cout << "Мода=2" << endl;
+		}
+
+		if (maximum == MassivSchet[0])
+		{
+			cout << "Мода=1" << endl;
+		}
+	system("pause");
+	return 0;
+}
