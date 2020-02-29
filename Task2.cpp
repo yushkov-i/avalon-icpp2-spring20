@@ -2,10 +2,11 @@
 #include "Extention.hpp"
 using namespace std;
 using namespace ext;
+const int index = 100; 
 
 int main() {
-	int marks[100], count1 = 0, count2 = 0, count3 = 0, count4 = 0, count5 = 0, mark25, mark50, mark75, count;
-	for (int i = 0; i < 100; i++) {
+	int marks[index], count1 = 0, count2 = 0, count3 = 0, count4 = 0, count5 = 0, mark25, mark50, mark75, count;
+	for (int i = 0; i < index; i++) {
 		marks[i] = GetRandomValue(1, 5);
 		if (marks[i] == 1) count1++;
 		if (marks[i] == 2) count2++;
@@ -19,7 +20,29 @@ int main() {
 	if (count3 < count4) moda = 4;
 	if (count4 < count5) moda = 5;
 	cout << "Moda = " << moda << endl;
-	while (count < 25){
-
+	while (count < index/4){
+		count = count1;
+		if (count > 25) {
+			mark25 = 1;
+			break;
+		}
+		if (count == 25) {
+			mark25 = 2;
+			break;
+		}
+		count += count2;
+		if (count > 25) {
+			mark25 = 2;
+			break;
+		}
+		if (count == 25) {
+			mark25 = 3;
+			break;
+		}
+		count += count3;
+		if (count > 25) {
+			mark25 = 2;
+			break;
+		}
 	}
 }
