@@ -77,4 +77,16 @@ int main()
      {
          cout << List[i].Id << ' ' << List[i].Name << ' ' << int(List[i].Mark)  << endl;
      }
+	     int count[5]={0};
+     for(int i=0; i<100; i++)
+     {
+         count[int(List[i].Mark)-1]++;
+     }
+	     for(int i=0; i<=4; i++){cout << "Оценок " << i+1 << " : " << count[i] << endl;}
+     if(count[0] > count[1] && count[0] > count[2] && count[0] > count[3] && count[0] > count[4] ){cout << "Мода оценок: 1";}
+     if(count[1] > count[0] && count[1] > count[2] && count[1] > count[3] && count[1] > count[4] ){cout << "Мода оценок: 2";}
+     if(count[2] > count[1] && count[2] > count[2] && count[0] > count[3] && count[2] > count[4] ){cout << "Мода оценок: 3";}
+     if(count[3] > count[1] && count[3] > count[2] && count[3] > count[0] && count[3] > count[4] ){cout << "Мода оценок: 4";}
+     if(count[4] > count[1] && count[4] > count[2] && count[4] > count[3] && count[4] > count[0] ){cout << "Мода оценок: 5";}
+    cout << endl;
     }
