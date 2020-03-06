@@ -27,9 +27,11 @@ int main()
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
-	int swap, criterion;
+	int swap, criterion, sum=0;
 	char ChSwap[7];
-	int count1=0, count2=0, count3=0, count4=0, count5=0, moda=0, tempmoda=0;
+	int moda=1;
+	int count[5] = { 0,0,0,0,0 };
+	bool b75 = true;
 
 	Student Students[n];
 	for (int i = 0; i < n; ++i) {
@@ -67,8 +69,8 @@ int main()
 	case 2:
 		for (int i = 0; i < n; ++i) {
 			for (int j = 0; j < n - 1 - i; ++j) {
-				if (/*static_cast<int>(*/Students[j].Mark/*)*/ > /*static_cast<int>(*/Students[j + 1].Mark/*)*/) {
-					swap = /*static_cast<int>(*/Students[j].Mark/*)*/;
+				if (Students[j].Mark > Students[j + 1].Mark) {
+					swap = Students[j].Mark;
 					Students[j].Mark = Students[j + 1].Mark;
 					Students[j + 1].Mark = static_cast<Grade>(swap);
 				}
@@ -81,10 +83,10 @@ int main()
 				for (int k = 0; k < 7; k++) {
 
 					if (Students[j].Name[k] > Students[j + 1].Name[k]) {
-						for (int l = 0; l < 7; l++) {
+						for (int l = 0; l < 7; ++l) {
 							ChSwap[l] = Students[j].Name[l];
 						};
-						for (int l = 0; l < 7; l++) {
+						for (int l = 0; l < 7; ++l) {
 							Students[j].Name[l] = Students[j + 1].Name[l];
 							Students[j + 1].Name[l] = ChSwap[l];
 						}
@@ -116,58 +118,67 @@ int main()
 
 	//moda
 	for (int i = 0; i < n; ++i) {
-		switch (Students[i].Mark) {
+		switch (static_cast<int>(Students[i].Mark)) {
 		case 1:
-			count1 += 1;
+			count[0] += 1;
 			break;
 		case 2:
-			count2 += 1;
+			count[1] += 1;
 			break;
 		case 3:
-			count3 += 1;
+			count[2] += 1;
 			break;
 		case 4:
-			count4 += 1;
+			count[3] += 1;
 			break;
 		case 5:
-			count5 += 1;
+			count[4] += 1;
+			break;
+
+
+		}
+	}
+	
+	for (int i = 0; i < 5; ++i) {
+		if (count[i] > count[moda-1]) 
+		{ 
+			moda = i + 1;
+		}
+		
+	}
+	cout << endl;
+	for (int i = 1; i < 6; ++i) {
+		cout << i << ": " << count[i - 1]<< endl;
+	}
+	cout <<endl<< "moda: " << moda << endl;
+
+	
+	for (int i = 0; i < 4; ++i) {
+		sum = sum + count[i];
+		if (sum > 25) {
+			cout << "Вам нужно получить оценку: " << i + 2 << ", чтобы быть лучше 25%." << endl;     
+			sum = 0;
 			break;
 		}
 	}
-	tempmoda = count1;
-	if (count2 > tempmoda){
-		tempmoda = count2;	
+	for (int i = 0; i < 4; ++i) {
+		sum = sum + count[i];
+		if (sum > 50) {
+			cout << "Вам нужно получить оценку: " << i + 2 << ", чтобы быть лучше 50%." << endl;     
+			sum = 0;
+			break;
+		}
 	}
-	if (count3 > tempmoda) {
-		tempmoda = count3;
+	for (int i = 0; i < 4; ++i) {
+		sum = sum + count[i];
+		if (sum > 75) {
+			cout << "Вам нужно получить оценку: " << i + 2 << ", чтобы быть лучше 75%." << endl;    
+			sum = 0;
+			b75 = false;
+			break;
+		}
 	}
-	if (count4 > tempmoda) {
-		tempmoda = count4;
-	}
-	if (count5 > tempmoda) {
-		tempmoda = count5;
-	}
-	
-	if (count1 == tempmoda) {
-		moda = 1;
-	}
-	if (count2 == tempmoda) {
-		moda = 2;
-	}
-	if (count3 == tempmoda) {
-		moda = 3;
-	}
-	if (count4 == tempmoda) {
-		moda = 4;
-	}
-	if (count5 == tempmoda) {
-		moda = 5;
-	}
-	cout <<endl<< "moda = " << moda << endl;
-
-	
-
-
+	if (b75){ cout << "Вам нужно получить оценку: 5, чтобы быть лучше 75%." << endl; }
 
 
 }
