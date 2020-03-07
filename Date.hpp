@@ -149,13 +149,5 @@ namespace ext
 	/*
 		Сортирует массив дат по указанному критерию
 	*/
-	void sort(Date dates[], SortBy sortBy = SortBy::Date);
-
-	/*
-		Проверяет может ли существовать дата с передаваемыми значениями.
-		В случае успеха возвращает true, и заполняет дату по переданному адресу.
-		Если дата с переданными параметрами существовать не может,
-		возвращает пустой указатель.
-	*/
-	Date * tryFillDate(int year, int month, int day);
+	void sort(Date dates[], SortBy sortBy = SortBy::Date);	
 }
