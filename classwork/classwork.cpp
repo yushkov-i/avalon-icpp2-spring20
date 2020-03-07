@@ -74,8 +74,8 @@ void printPoint(Point point)
 
 Point operator ++(Point& p)
 {
-	++(p.x);
-	++(p.y);
+	++p.x;
+	++p.y;
 	return p;
 }
 
@@ -91,7 +91,7 @@ int main()
 {
 	Point p{ 10,15 };
 	
-	Point pp = p++;
+	Point pp = ++p;
 	Point ppp = p++;	
 
 	int a = 10;
