@@ -1,0 +1,57 @@
+#include<iostream>
+#include "Extention.hpp"
+using namespace std;
+	using namespace ext;
+const int ColvoOfAgents = 10;
+const int Month = 12;
+	void Puzir(int* Mass_Pay, int size)//сортировка
+	{
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size - 1 - i; j++) {
+				if (Mass_Pay[j] > Mass_Pay[j + 1]) {
+					int swapp = Mass_Pay[j];
+					Mass_Pay[j] = Mass_Pay[j + 1];
+					Mass_Pay[j + 1] = swapp;
+				}
+			}
+		}
+	}
+	int main()
+	{
+		setlocale(LC_ALL, "RUS");
+		int MassivOfAgent[ColvoOfAgents][Month] = {};
+		int MinusMon;
+		for (int i = 0; i < ColvoOfAgents; i++) //заполнение массива
+		{
+			for (int j = 0; j < Month; j++)
+			{
+				MinusMon = GetRandomValue(1, 100);//рандом для "неработающих" месяцев
+				if (MinusMon > 0 && MinusMon <= 10)
+				{
+					MassivOfAgent[i][j] = -1;
+				}
+				else
+				{
+					MassivOfAgent[i][j] = GetRandomValue(1000, 100000);
+				}
+			}
+		}
+		for (int i = 0; i < ColvoOfAgents; i++)//Cортировка месяцев
+		{
+			Puzir(MassivOfAgent[i], Month);
+		}
+		int sum = 0, Max = -1, NumberOfBestWorker=0;
+		
+		for (int i = 0; i < ColvoOfAgents; i++)
+		{
+				sum = ((MassivOfAgent[i][7] + MassivOfAgent[i][6]) / 2);
+				if (sum > Max)
+				{
+					Max = sum;
+					NumberOfBestWorker = i;
+				}
+		}
+		cout << "Агент № " << NumberOfBestWorker + 1 <<" лучший"<< endl;
+		system("pause");
+	}
+
