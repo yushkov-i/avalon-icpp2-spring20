@@ -6,7 +6,7 @@ using namespace ext;
 
 int main()
 {
-	//Date date{ 12, static_cast<Month>(2), 1998 }; // плохо
+	//Date date{ 12, static_cast<Month>(2), 1998 }; // ГЇГ«Г®ГµГ®
 	Date date{ 1998, Month::February, 12 };
 
 	print(date, DateFormat::MonthAsInt);	// 12.2.1998
