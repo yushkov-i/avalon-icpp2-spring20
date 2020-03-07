@@ -149,5 +149,5 @@ namespace ext
 	/*
 		Сортирует массив дат по указанному критерию
 	*/
-	void sort(Date dates[], SortBy sortBy = SortBy::Date);	
+	void sort(Date dates[], int size);	
 }
