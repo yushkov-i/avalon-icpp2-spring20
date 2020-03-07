@@ -147,7 +147,7 @@ namespace ext
 	Date & getMaxDate(Date dates[], int size);
 
 	/*
-		Сортирует массив дат по указанному критерию
+		Сортирует массив дат
 	*/
 	void sort(Date dates[], int size);	
 }
