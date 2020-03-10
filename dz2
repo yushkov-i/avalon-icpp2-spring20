@@ -1,0 +1,107 @@
+#include<iostream>
+#include"Header.hpp"
+using namespace std;
+using namespace ext;
+enum Grade
+{
+	F = 1,  
+	D = 2, 
+	C = 3,  
+	B = 4, 
+	A = 5,      
+};
+
+struct Student
+{
+	int Id;
+	Grade Mark;
+	char Name[7];
+};
+int main()
+{
+	setlocale(0, "");
+	cout << "1 - id , 2 - оцека , 3 - name" << endl;
+	int mode;
+	cin >> mode;
+	Student student[100];
+	int A, B, C, D, E;
+	for (int n = 0; n < 100; n++)
+	{
+		student[n].Id = GetRandomValue(1, 1000);
+		student[n].Mark = static_cast<Grade>(GetRandomValue(1, 5)); 
+		if (student[n].Mark == 5)
+			A += 1;
+		else if (student[n].Mark == 4)
+			B += 1;
+		else if (student[n].Mark == 3)
+			C += 1;
+		else if (student[n].Mark == 2)
+			D += 1;
+		else if (student[n].Mark == 1)
+			E += 1;
+		int tempLength = GetRandomValue(3, 6);
+		for (int i = 0; i < tempLength; ++i)
+		{
+			int symbol = GetRandomValue('a', 'z');
+			student[n].Name[i] = symbol;
+		}
+
+		for (int i = tempLength; i < 7; ++i)
+		{
+			student[n].Name[i] = '\0';
+		}
+	}
+
+
+	for (int i = 0; i < 100; i++)
+			{
+				bool isSwap = false;
+				for (int j = 0; j < 100- 1 ; j++)
+				{
+					if (mode == 1)
+					{
+						if (student[j].Id > student[j + 1].Id)
+						{
+							int temp1;
+							temp1 = student[j].Id;
+							student[j].Id = student[j + 1].Id;
+							student[j + 1].Id = temp1;
+						}
+						else
+							isSwap = true;
+					}
+					else if (mode == 2)
+					{
+						if (student[j].Mark > student[j + 1].Mark)
+						{
+							Grade temp2;
+							temp2 = student[j].Mark;
+							student[j].Mark = student[j + 1].Mark;
+							student[j + 1].Mark = temp2;
+						}
+						else
+							isSwap = true;
+					}
+					else if (mode == 3)
+					{
+						if (static_cast<int>(student[j].Name[0]) > static_cast<int>(student[j + 1].Name[0]))
+						{
+							char* temp3;
+							temp3 = student[j].Name;
+							*student[j].Name = *student[j + 1].Name;
+							*student[j + 1].Name = *temp3;
+						}
+						else
+							isSwap = true;
+					}
+				}
+			if (!isSwap)
+				break;
+	}
+	for (int i = 0; i < 100; i++)
+	{
+		cout << student[i].Id << "\t " << student[i].Mark << "\t " << student[i].Name;
+		cout << endl;
+	}
+
+}
