@@ -5,11 +5,11 @@
 using namespace std;
 int main()
 {
-    int N = 0, lastnum = 0, temp=0 ;
     long num = 0;
     cout << "Введите кол-во вводимых ISBN-13: ";
     cin >> N;
     for (int i = 0; i < N; i++) {
+        int N = 0, lastnum = 0, temp=0 ;
         cin >> num;
         lastnum = num % 10;
         num /= 10;
@@ -21,9 +21,6 @@ int main()
             cout << "valid" << endl;
         }
         else cout << "invalid" << endl;
-        temp = 0;
-        num = 0;
-        lastnum = 0;
     }
     system("pause");
     return 0;
