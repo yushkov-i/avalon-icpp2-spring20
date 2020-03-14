@@ -5,7 +5,7 @@
 using namespace std;
 int main()
 {
-    long num = 0;
+    long long num = 0;
     cout << "Введите кол-во вводимых ISBN-13: ";
     cin >> N;
     for (int i = 0; i < N; i++) {
