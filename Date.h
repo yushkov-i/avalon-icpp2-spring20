@@ -1,5 +1,4 @@
 #pragma once
-
 namespace ext
 {
 	enum class Month
@@ -50,17 +49,34 @@ namespace ext
 		int delta;
 	};
 
-	
+
 
 
 
 
 	/*----------homework-04----------*/
+
+	Date countGR(TimeDelta a) {
+		TimeDelta b, c, d, e, m;
+		a.delta = a.delta + 32044;
+		b.delta = (4 * a.delta + 3) / 146097;
+		c.delta = a.delta - (146097 * b.delta) / 4;
+		d.delta = (4 * c.delta + 3) / 1461;
+		e.delta = c.delta - (1461 * d.delta) / 4;
+		m.delta = (5 * e.delta + 2) / 153;
+		Date res;
+		res.day = e.delta - (153 * m.delta + 2) / 5 + 1;
+		res.month = static_cast<Month>(m.delta + 3 - 12 * (m.delta / 10));
+		res.year = 100 * b.delta + d.delta - 4800 + m.delta / 10;
+		return res;
+	}
+
+
 		/*
-			Возвращает Юлианскую дату
+			Г‚Г®Г§ГўГ°Г Г№Г ГҐГІ ГћГ«ГЁГ Г­Г±ГЄГіГѕ Г¤Г ГІГі
 			https://ru.wikipedia.org/wiki/%D0%AE%D0%BB%D0%B8%D0%B0%D0%BD%D1%81%D0%BA%D0%B0%D1%8F_%D0%B4%D0%B0%D1%82%D0%B0
-			раздел "Вычисление номера юлианского дня (JDN) по дате григорианского календаря"
-			Тестовые данные					Ожидаемый результат
+			Г°Г Г§Г¤ГҐГ« "Г‚Г»Г·ГЁГ±Г«ГҐГ­ГЁГҐ Г­Г®Г¬ГҐГ°Г  ГѕГ«ГЁГ Г­Г±ГЄГ®ГЈГ® Г¤Г­Гї (JDN) ГЇГ® Г¤Г ГІГҐ ГЈГ°ГЁГЈГ®Г°ГЁГ Г­Г±ГЄГ®ГЈГ® ГЄГ Г«ГҐГ­Г¤Г Г°Гї"
+			Г’ГҐГ±ГІГ®ГўГ»ГҐ Г¤Г Г­Г­Г»ГҐ					ГЋГ¦ГЁГ¤Г ГҐГ¬Г»Г© Г°ГҐГ§ГіГ«ГјГІГ ГІ
 			1.12.2018					2458454
 			1.1.2018					2458120
 			1.6.2000					2451697
@@ -80,18 +96,15 @@ namespace ext
 	}
 
 	/*
-		Рассчитывает количество дней между двумя датами.
-		При реализвации используйте CountJND
+		ГђГ Г±Г±Г·ГЁГІГ»ГўГ ГҐГІ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¤Г­ГҐГ© Г¬ГҐГ¦Г¤Гі Г¤ГўГіГ¬Гї Г¤Г ГІГ Г¬ГЁ.
+		ГЏГ°ГЁ Г°ГҐГ Г«ГЁГ§ГўГ Г¶ГЁГЁ ГЁГ±ГЇГ®Г«ГјГ§ГіГ©ГІГҐ CountJND
 	*/
 	TimeDelta countDistance(Date from, Date to) {
-		TimeDelta a = countJND(to);
-		TimeDelta b = countJND(from);
-		TimeDelta c = a - b;
-		return c;
+		return countJND(to) - countJND(from);
 	}
 
 	/*
-		Выводит в консоль
+		Г‚Г»ГўГ®Г¤ГЁГІ Гў ГЄГ®Г­Г±Г®Г«Гј
 	*/
 	void PrintSeasonAsString(Season season) {
 		switch (season) {
@@ -138,7 +151,7 @@ namespace ext
 		}
 	}
 	/*
-		Выводит в консоль
+		Г‚Г»ГўГ®Г¤ГЁГІ Гў ГЄГ®Г­Г±Г®Г«Гј
 	*/
 	void print(Date data, DateFormat format = DateFormat::MonthAsInt) {
 		std::cout << data.day;
@@ -170,15 +183,15 @@ namespace ext
 	}
 
 	/*
-		Возвращает сезон (зима, весна, лето, осень) передаваемой даты
+		Г‚Г®Г§ГўГ°Г Г№Г ГҐГІ Г±ГҐГ§Г®Г­ (Г§ГЁГ¬Г , ГўГҐГ±Г­Г , Г«ГҐГІГ®, Г®Г±ГҐГ­Гј) ГЇГҐГ°ГҐГ¤Г ГўГ ГҐГ¬Г®Г© Г¤Г ГІГ»
 	*/
-	
+
 	Season getSeason(Month month) {
-		if (static_cast<int>(month) < 3 && static_cast<int>(month) > 0 || static_cast<int>(month) == 12) {
-			return static_cast<Season>(0);
+		if (static_cast<int>(month) < 3 && static_cast<int>(month) > 0 || month == Month::December) {
+			return Season::Winter;
 		}
 		else if (static_cast<int>(month) > 2 && static_cast<int>(month) < 6) {
-			return static_cast<Season>(1);
+			return Season::Spring;
 		}
 		else if (static_cast<int>(month) > 5 && static_cast<int>(month) < 9) {
 			return static_cast<Season>(2);
@@ -187,12 +200,13 @@ namespace ext
 			return static_cast<Season>(3);
 		}
 	}
+
 	Season getSeason(Date date) {
 		return getSeason(date.month);
 	}
 
 	/*
-		Написать перегрузку для следующих логических операторов
+		ГЌГ ГЇГЁГ±Г ГІГј ГЇГҐГ°ГҐГЈГ°ГіГ§ГЄГі Г¤Г«Гї Г±Г«ГҐГ¤ГіГѕГ№ГЁГµ Г«Г®ГЈГЁГ·ГҐГ±ГЄГЁГµ Г®ГЇГҐГ°Г ГІГ®Г°Г®Гў
 	*/
 	bool operator == (const Date lhs, const Date rhs) {
 		return (lhs.year == rhs.year && lhs.month == rhs.month && lhs.day == rhs.day);
@@ -215,26 +229,13 @@ namespace ext
 	}
 
 	/*
-		Написать перегрузку для следующих арифметических операторов
+		ГЌГ ГЇГЁГ±Г ГІГј ГЇГҐГ°ГҐГЈГ°ГіГ§ГЄГі Г¤Г«Гї Г±Г«ГҐГ¤ГіГѕГ№ГЁГµ Г Г°ГЁГґГ¬ГҐГІГЁГ·ГҐГ±ГЄГЁГµ Г®ГЇГҐГ°Г ГІГ®Г°Г®Гў
 	*/
+
 	Date operator + (const Date date, const TimeDelta delta) {
-		TimeDelta a, b, c, d, e, m;
-		a = countJND(date);
-
-		a.delta = a.delta + 32044 + delta.delta;
-		b.delta = (4 * a.delta + 3) / 146097;
-		c.delta = a.delta - (146097 * b.delta) / 4;
-		d.delta = (4 * c.delta + 3) / 1461;
-		e.delta = c.delta - (1461 * d.delta) / 4;
-		m.delta = (5 * e.delta + 2) / 153;
-
-		Date res;
-		res.day = e.delta - (153 * m.delta + 2) / 5 + 1;
-		int temp = m.delta + 3 - 12 * (m.delta / 10);
-		res.month = static_cast<Month>(m.delta + 3 - 12 * (m.delta / 10));
-		//res.month = Month::January;
-		res.year = 100 * b.delta + d.delta - 4800 + m.delta / 10;
-		return res;
+		TimeDelta a = countJND(date);
+		a = a + delta;
+		return countGR(a);
 	}
 	Date operator + (const TimeDelta delta, const Date date) {
 		return date + delta;
@@ -250,7 +251,7 @@ namespace ext
 		return res;
 	}
 
-	
+
 
 	TimeDelta operator * (const TimeDelta delta, int multiplier)
 	{
@@ -277,45 +278,45 @@ namespace ext
 	Date operator -- (Date& delta, int);
 
 	/*
-		Меняет даты местами
+		ГЊГҐГ­ГїГҐГІ Г¤Г ГІГ» Г¬ГҐГ±ГІГ Г¬ГЁ
 	*/
 	void swap(Date& lhs, Date& rhs);
 
 	/*
-		Меняет временные интервалы местами
+		ГЊГҐГ­ГїГҐГІ ГўГ°ГҐГ¬ГҐГ­Г­Г»ГҐ ГЁГ­ГІГҐГ°ГўГ Г«Г» Г¬ГҐГ±ГІГ Г¬ГЁ
 	*/
 	void swap(TimeDelta& lhs, TimeDelta& rhs);
 
 	/*
-		Возвращает ссылку на большую дату
+		Г‚Г®Г§ГўГ°Г Г№Г ГҐГІ Г±Г±Г»Г«ГЄГі Г­Г  ГЎГ®Г«ГјГёГіГѕ Г¤Г ГІГі
 	*/
 	Date& max(Date& lhs, Date& rsh);
 
 	/*
-		Возвращает указатель на меньшую дату
+		Г‚Г®Г§ГўГ°Г Г№Г ГҐГІ ГіГЄГ Г§Г ГІГҐГ«Гј Г­Г  Г¬ГҐГ­ГјГёГіГѕ Г¤Г ГІГі
 	*/
 	Date& min(Date& lhs, Date& rsh);
 
 	/*
-		Возвращает указатель на минимальную дату в переданном массиве дат
+		Г‚Г®Г§ГўГ°Г Г№Г ГҐГІ ГіГЄГ Г§Г ГІГҐГ«Гј Г­Г  Г¬ГЁГ­ГЁГ¬Г Г«ГјГ­ГіГѕ Г¤Г ГІГі Гў ГЇГҐГ°ГҐГ¤Г Г­Г­Г®Г¬ Г¬Г Г±Г±ГЁГўГҐ Г¤Г ГІ
 	*/
 	Date& getMinDate(Date dates[], int size);
 
 	/*
-		Возвращает указатель на максимальную дату в переданном массиве дат
+		Г‚Г®Г§ГўГ°Г Г№Г ГҐГІ ГіГЄГ Г§Г ГІГҐГ«Гј Г­Г  Г¬Г ГЄГ±ГЁГ¬Г Г«ГјГ­ГіГѕ Г¤Г ГІГі Гў ГЇГҐГ°ГҐГ¤Г Г­Г­Г®Г¬ Г¬Г Г±Г±ГЁГўГҐ Г¤Г ГІ
 	*/
 	Date& getMaxDate(Date dates[], int size);
 
 	/*
-		Сортирует массив дат по указанному критерию
+		Г‘Г®Г°ГІГЁГ°ГіГҐГІ Г¬Г Г±Г±ГЁГў Г¤Г ГІ ГЇГ® ГіГЄГ Г§Г Г­Г­Г®Г¬Гі ГЄГ°ГЁГІГҐГ°ГЁГѕ
 	*/
 	void sort(Date dates[], SortBy sortBy = SortBy::Date);
 
 	/*
-		Проверяет может ли существовать дата с передаваемыми значениями.
-		В случае успеха возвращает true, и заполняет дату по переданному адресу.
-		Если дата с переданными параметрами существовать не может,
-		возвращает пустой указатель.
+		ГЏГ°Г®ГўГҐГ°ГїГҐГІ Г¬Г®Г¦ГҐГІ Г«ГЁ Г±ГіГ№ГҐГ±ГІГўГ®ГўГ ГІГј Г¤Г ГІГ  Г± ГЇГҐГ°ГҐГ¤Г ГўГ ГҐГ¬Г»Г¬ГЁ Г§Г­Г Г·ГҐГ­ГЁГїГ¬ГЁ.
+		Г‚ Г±Г«ГіГ·Г ГҐ ГіГ±ГЇГҐГµГ  ГўГ®Г§ГўГ°Г Г№Г ГҐГІ true, ГЁ Г§Г ГЇГ®Г«Г­ГїГҐГІ Г¤Г ГІГі ГЇГ® ГЇГҐГ°ГҐГ¤Г Г­Г­Г®Г¬Гі Г Г¤Г°ГҐГ±Гі.
+		Г…Г±Г«ГЁ Г¤Г ГІГ  Г± ГЇГҐГ°ГҐГ¤Г Г­Г­Г»Г¬ГЁ ГЇГ Г°Г Г¬ГҐГІГ°Г Г¬ГЁ Г±ГіГ№ГҐГ±ГІГўГ®ГўГ ГІГј Г­ГҐ Г¬Г®Г¦ГҐГІ,
+		ГўГ®Г§ГўГ°Г Г№Г ГҐГІ ГЇГіГ±ГІГ®Г© ГіГЄГ Г§Г ГІГҐГ«Гј.
 	*/
 	Date* tryFillDate(int year, int month, int day);
 }
