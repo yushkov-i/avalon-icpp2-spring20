@@ -4,27 +4,41 @@ using namespace std;
 
 int main()
 {
-    int N;
-    cout << "N = ";
-    cin >> N ;
-    for (int i = 0; i < N; i ++) {
-        char isbn[13];
-        int summ = 0;
-        cout  << "ISBN =";
-        for (int g = 0 ; g < 13; g ++){
-            cin >> isbn[g];
-        }
-        for (int g = 0 ; g < 12; g ++){
-            summ+=isbn[g];
-        }
-        if((summ%10)+isbn[12]==10){
-            cout << "valid" <<endl;
-            
-        }
-            else if((summ%10)+isbn[12]!=10){
-                cout << "invalid"<< endl;
-        }
-    }
+	int N;
+	cout << "N = ";
+	cin >> N;
+	
+	for (int i = 0; i < N; i++) {
+		char isbn[13];
+		
+		cout << "ISBN =";
+		for (int g = 0; g < 13; g++) {
+			cin >> isbn[g];
+			isbn[g] -= '0';
+
+		}
+		int summ = 0;
+		for (int g = 0; g < 12; g++) {
+			if ((g+1) % 2 == 0)
+			{
+			summ = summ + isbn[g] * 1;
+			}
+			else
+			{
+				summ += isbn[g] * 3;
+			}
+		}
+		if ((summ % 10) + isbn[12] == 10) {
+			cout << "valid" << endl;
+
+		}
+		else if ((summ % 10) + isbn[12] != 10) {
+			cout << "invalid" << endl;
+		}
+	}
+
+	return 0;
+}
 
     return 0;
 }
