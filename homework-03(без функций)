@@ -1,0 +1,70 @@
+#include <iostream>
+#include "Extention.hpp"
+
+using namespace std;
+using namespace ext;
+
+int main()
+{
+	setlocale(0, "");
+	int agents_money[10][12], maxmedian[2];
+
+	for (int i = 0; i < 10; i++)
+	{
+		int locmedian = 0, minus = 0;
+		
+	
+		for (int j = 0; j < 12; j++)
+		{
+		 int work = GetRandomValue(0,1);
+		
+
+			if (work == 1)
+			{
+				agents_money[i][j] = GetRandomValue(1000, 100000);
+				cout << agents_money[i][j] << " ";
+			}
+			else
+			{
+				agents_money[i][j] = -1;
+				minus += 1;
+			}
+		}
+
+		cout << endl;
+
+		for (int j = 0; j < 11; j++)
+		{
+			for (int g = 0; g < 11 - j; g++)
+			{
+				if (agents_money[i][g] > agents_money[i][g + 1])
+				{
+					int exchange = agents_money[i][g];
+					agents_money[i][g] = agents_money[i][g + 1];
+					agents_money[i][g + 1] = exchange;
+				}
+			}
+		}
+
+		for (int j = minus; j < 12; j++)
+			cout << agents_money[i][j] << " ";
+		
+		int a = ((12 - minus) / 2);
+
+		if ((12 - minus) % 2 == 0)
+			locmedian = (agents_money[i][minus + a] + agents_money[i][minus + a - 1]) / 2;
+		else
+			locmedian = agents_money[i][minus + a];
+		
+		
+		cout << " | " << locmedian << " " << minus << " " << a << endl << endl;
+		
+		if (locmedian > maxmedian[0])
+		{
+			maxmedian[0] = locmedian;
+			maxmedian[1] = i;
+		}
+	}
+
+	cout << "Лучшее медианное значение у агента номер " << maxmedian[1] << ": " << maxmedian[0];
+	}
