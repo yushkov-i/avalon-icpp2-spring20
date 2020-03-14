@@ -1,57 +1,57 @@
-#include <iostream>
- #include "Extention.hpp"
- using namespace std;
-int (){
-     
-}
 
-  int main()
- {
-     int tabl[10][12];
-         for(int i=0; i<10; i++)
-     {
-         for(int j=0; j<12; j++)
-         {
-            tabl[i][j] =-1;
-         }
-     }
-     int work;
-     for(int i = 0; i < 10; i++){
-         for(int j = 0;j<12;j++){
-             
-         work = GetRandomValue(1,2);
-         if (work == 2){
-             tabl[i;j]=GetRandomValue(1000,100000);
-         }
-        }
-        int worker;
-        int best = 1000;
-        for(i = 0;i<10;i++){
-            int chek=[12];
-            int shetch=0;
-            int median;
-            for(j = 0;j<12;j++){
-                if(tabl[i][j]!=-1){
-                    if (tabl[i][j]!=1){
-                    chek[shetch]=tabl[i][j];
-                    shetch++;
-                    }
-                }
-            
-            }
-            for(int j = 0;j<shetch + 1;j++){
-                for(int k=j;k<shetch + 1; k++)
-                if(chek[j]>chek[k]){
-                    int buf;
-                    buf = chek[k];
-                    chek[k]=chek[j];
-                    chek[j]=buf;
-                }
-            }
-            median = chek[shetch/2];
-            if(median>best){
-                best=median;
-                worker=i;
-            }
-        }
-     }
+#include <iostream>
+#include "Extention.hpp"
+using namespace std;
+using namespace ext;
+
+int main()
+{
+	int tabl[10][12];
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 12; j++)
+		{
+			tabl[i][j] = -1;
+		}
+	}
+	int work;
+	for (int i = 0; i < 10; i++) {
+		for (int j = 0; j < 12; j++) {
+
+			work = GetRandomValue(1, 2);
+			if (work == 2) {
+				tabl[i][j] = GetRandomValue(1000, 100000);
+			}
+		}
+		int worker;
+		int best = 1000;
+		for (i = 0; i < 10; i++) {
+			int chek[12];
+			int shetch = 0;
+			int median;
+			for (int j = 0; j < 12; j++) {
+				if (tabl[i][j] != -1) {
+					if (tabl[i][j] != 1) {
+						chek[shetch] = tabl[i][j];
+						shetch++;
+					}
+				}
+
+			}
+			for (int j = 0; j < shetch + 1; j++) {
+				for (int k = j; k < shetch + 1; k++)
+					if (chek[j] > chek[k]) {
+						int buf;
+						buf = chek[k];
+						chek[k] = chek[j];
+						chek[j] = buf;
+					}
+			}
+			median = chek[shetch / 2];
+			if (median > best) {
+				best = median;
+				worker = i;
+			}
+		}
+	}
+}
