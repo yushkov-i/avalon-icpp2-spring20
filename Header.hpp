@@ -52,10 +52,10 @@ namespace ext
 
 	/*----------homework-04----------*/
 		/*
-			Возвращает Юлианскую дату
+			Р’РѕР·РІСЂР°С‰Р°РµС‚ Р®Р»РёР°РЅСЃРєСѓСЋ РґР°С‚Сѓ
 			https://ru.wikipedia.org/wiki/%D0%AE%D0%BB%D0%B8%D0%B0%D0%BD%D1%81%D0%BA%D0%B0%D1%8F_%D0%B4%D0%B0%D1%82%D0%B0
-			раздел "Вычисление номера юлианского дня (JDN) по дате григорианского календаря"
-			Тестовые данные					Ожидаемый результат
+			СЂР°Р·РґРµР» "Р’С‹С‡РёСЃР»РµРЅРёРµ РЅРѕРјРµСЂР° СЋР»РёР°РЅСЃРєРѕРіРѕ РґРЅСЏ (JDN) РїРѕ РґР°С‚Рµ РіСЂРёРіРѕСЂРёР°РЅСЃРєРѕРіРѕ РєР°Р»РµРЅРґР°СЂСЏ"
+			РўРµСЃС‚РѕРІС‹Рµ РґР°РЅРЅС‹Рµ					РћР¶РёРґР°РµРјС‹Р№ СЂРµР·СѓР»СЊС‚Р°С‚
 			1.12.2018					2458454
 			1.1.2018					2458120
 			1.6.2000					2451697
@@ -69,8 +69,8 @@ namespace ext
 	}
 
 	/*
-		Рассчитывает количество дней между двумя датами.
-		При реализвации используйте CountJND
+		Р Р°СЃСЃС‡РёС‚С‹РІР°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ РґРЅРµР№ РјРµР¶РґСѓ РґРІСѓРјСЏ РґР°С‚Р°РјРё.
+		РџСЂРё СЂРµР°Р»РёР·РІР°С†РёРё РёСЃРїРѕР»СЊР·СѓР№С‚Рµ CountJND
 	*/
 	TimeDelta countDistance(Date from, Date to) {
 		TimeDelta a, b, dist;
@@ -81,7 +81,7 @@ namespace ext
 	}
 
 	/*
-		Выводит в консоль
+		Р’С‹РІРѕРґРёС‚ РІ РєРѕРЅСЃРѕР»СЊ
 	*/
 	void print(Month month, DateFormat format = DateFormat::MonthAsInt) {
 		if (format == DateFormat::MonthAsInt) {
@@ -146,7 +146,7 @@ namespace ext
 	}
 
 	/*
-		Возвращает сезон (зима, весна, лето, осень) передаваемой даты
+		Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃРµР·РѕРЅ (Р·РёРјР°, РІРµСЃРЅР°, Р»РµС‚Рѕ, РѕСЃРµРЅСЊ) РїРµСЂРµРґР°РІР°РµРјРѕР№ РґР°С‚С‹
 	*/
 
 	Season getSeason(Month month) {
@@ -170,7 +170,7 @@ namespace ext
 	
 
 	/*
-		Написать перегрузку для следующих логических операторов
+		РќР°РїРёСЃР°С‚СЊ РїРµСЂРµРіСЂСѓР·РєСѓ РґР»СЏ СЃР»РµРґСѓСЋС‰РёС… Р»РѕРіРёС‡РµСЃРєРёС… РѕРїРµСЂР°С‚РѕСЂРѕРІ
 	*/
     bool operator == (const Date lhs, const Date rhs) {
 		return lhs.year == rhs.year 
@@ -270,7 +270,7 @@ namespace ext
 		return x;
 	}
 	/*
-		Написать перегрузку для следующих арифметических операторов
+		РќР°РїРёСЃР°С‚СЊ РїРµСЂРµРіСЂСѓР·РєСѓ РґР»СЏ СЃР»РµРґСѓСЋС‰РёС… Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРёС… РѕРїРµСЂР°С‚РѕСЂРѕРІ
 	*/
 	Date operator + (const Date date, const TimeDelta delta) {
 		TimeDelta j_year = countJND(date);
@@ -297,28 +297,30 @@ namespace ext
 	/*----------homework-05----------*/
 
 	TimeDelta operator ++ (TimeDelta& delta) {
-		TimeDelta x = delta;
-		x.delta++;
-		return x;
+		return delta++;
 	}
 
-	TimeDelta operator ++ (TimeDelta& delta, int);
+	TimeDelta operator ++ (TimeDelta& delta, int) {
+		return ++delta;
+	}
 
 	TimeDelta operator -- (TimeDelta& delta) {
-		TimeDelta x = delta;
-		x.delta--;
-		return x;
+		return delta--;
 	}
-	TimeDelta operator -- (TimeDelta& delta, int);
+	TimeDelta operator -- (TimeDelta& delta, int) {
+		return --delta;
+	}
 
-	Date operator ++ (Date& delta);
+	Date operator ++ (Date& delta) {
+		return delta++;
+	}
 	Date operator ++ (Date& delta, int);
 
 	Date operator -- (Date& delta);
 	Date operator -- (Date& delta, int);
 
 	/*
-		Меняет даты местами
+		РњРµРЅСЏРµС‚ РґР°С‚С‹ РјРµСЃС‚Р°РјРё
 	*/
 	void swap(Date& lhs, Date& rhs) {
 		Date tmp;
@@ -328,7 +330,7 @@ namespace ext
 	}
 
 	/*
-		Меняет временные интервалы местами
+		РњРµРЅСЏРµС‚ РІСЂРµРјРµРЅРЅС‹Рµ РёРЅС‚РµСЂРІР°Р»С‹ РјРµСЃС‚Р°РјРё
 	*/
 	void swap(TimeDelta& lhs, TimeDelta& rhs) {
 		TimeDelta tmp;
@@ -338,7 +340,7 @@ namespace ext
 	}
 
 	/*
-		Возвращает ссылку на большую дату
+		Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃСЃС‹Р»РєСѓ РЅР° Р±РѕР»СЊС€СѓСЋ РґР°С‚Сѓ
 	*/
 	Date& max(Date& lhs, Date& rhs) {
 		if (lhs > rhs) {
@@ -352,7 +354,7 @@ namespace ext
 	}
 
 	/*
-		Возвращает ссылку на меньшую дату
+		Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃСЃС‹Р»РєСѓ РЅР° РјРµРЅСЊС€СѓСЋ РґР°С‚Сѓ
 	*/
 	Date& min(Date& lhs, Date& rhs) {
 		if (lhs < rhs) {
@@ -366,7 +368,7 @@ namespace ext
 	}
 
 	/*
-		Возвращает ссылку на минимальную дату в переданном массиве дат
+		Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃСЃС‹Р»РєСѓ РЅР° РјРёРЅРёРјР°Р»СЊРЅСѓСЋ РґР°С‚Сѓ РІ РїРµСЂРµРґР°РЅРЅРѕРј РјР°СЃСЃРёРІРµ РґР°С‚
 	*/
 	Date& getMinDate(Date dates[], int size) {
 		Date tmp = dates[0];
@@ -380,7 +382,7 @@ namespace ext
 	}
 
 	/*
-		Возвращает ссылку на максимальную дату в переданном массиве дат
+		Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃСЃС‹Р»РєСѓ РЅР° РјР°РєСЃРёРјР°Р»СЊРЅСѓСЋ РґР°С‚Сѓ РІ РїРµСЂРµРґР°РЅРЅРѕРј РјР°СЃСЃРёРІРµ РґР°С‚
 	*/
 	Date& getMaxDate(Date dates[], int size) {
 		Date tmp = dates[0];
@@ -394,7 +396,7 @@ namespace ext
 	}
 
 	/*
-		Сортирует массив дат
+		РЎРѕСЂС‚РёСЂСѓРµС‚ РјР°СЃСЃРёРІ РґР°С‚
 	*/
 	void sort(Date dates[], int size) {
 		Date tmp{};
