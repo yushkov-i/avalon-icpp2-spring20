@@ -5,7 +5,7 @@
 int main()
 {
 
-#ifdef __WIN32__
+
 	int data[SIZE];
-#endif
+
 }
