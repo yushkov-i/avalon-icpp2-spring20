@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
 	//1.
-	int a[10][12][2],p=0,q[10],j=0;
+	int a[10][12][2],p=0,q[10],j=0,l[12];
 	for (int k; k < 10; ++k) {
 		for (int i = 0; i < 12; ++i) {
 			a[k][i][0] = getrandomvalue(1000, 100000);
@@ -16,16 +16,26 @@ int main()
 		}
 		for (int i = 0; i < 12; ++i) {
 			if (a[k][i][1] == 0) {
+				l[p]=a[k][i][0];
 				++p;
 			}
 		}
+		for (int i = 0; i < p; i++) {
+    for (int j = 0; j < p-1; j++) {
+      if (digitals[j] > digitals[j + 1]) {
+        int b = l[j]; 
+        l[j] = l[j+1]; 
+        l[j+1] = b; 
+      }
+    }
+  }
 		if (p % 2 == 0) {
 			p = p / 2 - 1;
-			q[k] = (a[k][p][0]+a[k][p+1][0])/2;
+			q[k] = (l[p]+l[p+1])/2;
 		}
 		else {
 			p = (p - 1) / 2; 
-			q[k] = a[k][p][0];
+			q[k] = l[p];
 	}
 	}
 	for (int i = 0; i < 10; ++i) {
