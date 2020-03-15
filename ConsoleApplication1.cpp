@@ -22,7 +22,7 @@ int main()
 		}
 		for (int i = 0; i < p; i++) {
     for (int j = 0; j < p-1; j++) {
-      if (digitals[j] > digitals[j + 1]) {
+      if (l[j] > l[j+1]) {
         int b = l[j]; 
         l[j] = l[j+1]; 
         l[j+1] = b; 
