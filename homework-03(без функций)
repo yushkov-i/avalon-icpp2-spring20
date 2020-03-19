@@ -11,29 +11,39 @@ int main()
 
 	for (int i = 0; i < 10; i++)
 	{
-		int locmedian = 0, minus = 0;
+		int locmedian = 0, minus = 0, work = 0;
+		cout << "Агент " << i << ":" << endl;
 		
-	
 		for (int j = 0; j < 12; j++)
 		{
-		 int work = GetRandomValue(0,1);
+		 
+			if (work != 2) 
+			{
+				work = GetRandomValue(0, 1); // заполнение месяцев, которые агент не работал
+				if (work == 0)
+				{
+					int k = GetRandomValue(1, 6); // от 1 до 6, чтобы агент работал хотя бы половину года
+					for (int g = j; g < k + j; g++)
+					{
+						agents_money[i][g] = -1;
+						cout << agents_money[i][g] << " ";
+						minus += 1;
+					}
+					j += k;
+					work = 2;
+				}
+			}
 		
 
-			if (work == 1)
-			{
-				agents_money[i][j] = GetRandomValue(1000, 100000);
-				cout << agents_money[i][j] << " ";
-			}
-			else
-			{
-				agents_money[i][j] = -1;
-				minus += 1;
-			}
+			agents_money[i][j] = GetRandomValue(1000, 100000); 
+			cout << agents_money[i][j] << " ";
+			
 		}
 
 		cout << endl;
 
-		for (int j = 0; j < 11; j++)
+		//сортировка значений заработка по возрастанию
+		for (int j = 0; j < 11; j++) 
 		{
 			for (int g = 0; g < 11 - j; g++)
 			{
@@ -46,19 +56,21 @@ int main()
 			}
 		}
 
-		for (int j = minus; j < 12; j++)
+		for (int j = 0; j < 12; j++)
 			cout << agents_money[i][j] << " ";
 		
-		int a = ((12 - minus) / 2);
+		//  определение медианы
+		int mid_index = ((12 - minus) / 2);
 
 		if ((12 - minus) % 2 == 0)
-			locmedian = (agents_money[i][minus + a] + agents_money[i][minus + a - 1]) / 2;
+			locmedian = (agents_money[i][minus + mid_index] + agents_money[i][minus + mid_index - 1]) / 2;
 		else
-			locmedian = agents_money[i][minus + a];
+			locmedian = agents_money[i][minus + mid_index];
 		
 		
-		cout << " | " << locmedian << " " << minus << " " << a << endl << endl;
+		cout << " | " << locmedian << " " << minus << " " << mid_index << endl << endl; 
 		
+		//определение наибольшей медианы
 		if (locmedian > maxmedian[0])
 		{
 			maxmedian[0] = locmedian;
