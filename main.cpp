@@ -1,17 +1,18 @@
-#include <iostream>
+п»ї#include <iostream>
+#include <iomanip>
 #include <windows.h>
-#include <C:\Users\Usserr\Desktop\C++\homework-02\homework-02\Extention.h>
+#include "Extention.h"
 
 using namespace std;
 using namespace ext;
 
 enum Grade
 {
-	F = 1,   // неявка
-	D = 2,  // неудовлетворительно
-	C = 3,  // удовлетворительно
-	B = 4,  // хорошо
-	A = 5,  // отлично      
+	F = 1,   // РЅРµСЏРІРєР°
+	D = 2,  // РЅРµСѓРґРѕРІР»РµС‚РІРѕСЂРёС‚РµР»СЊРЅРѕ
+	C = 3,  // СѓРґРѕРІР»РµС‚РІРѕСЂРёС‚РµР»СЊРЅРѕ
+	B = 4,  // С…РѕСЂРѕС€Рѕ
+	A = 5,  // РѕС‚Р»РёС‡РЅРѕ      
 };
 
 struct Student
@@ -20,6 +21,11 @@ struct Student
 	Grade Mark;
 	char Name[7];
 };
+void Swapst(Student& st1, Student& st2 ) {
+	Student temp = st1;
+	st1 = st2;
+	st2 = temp;
+ }
 const int n = 100;
 
 
@@ -28,10 +34,6 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	int swap, criterion, sum=0;
-	char ChSwap[7];
-	int moda=1;
-	int count[5] = { 0,0,0,0,0 };
-	bool b75 = true;
 
 	Student Students[n];
 	for (int i = 0; i < n; ++i) {
@@ -52,16 +54,14 @@ int main()
 
 
 
-	cout << "Выберите по какому критерию отсортировать студентов:\n1. По Id\n2. По Mark\n3. По Name\nСортировать по(1, 2, 3): ";
+	cout << "Р’С‹Р±РµСЂРёС‚Рµ РїРѕ РєР°РєРѕРјСѓ РєСЂРёС‚РµСЂРёСЋ РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°С‚СЊ СЃС‚СѓРґРµРЅС‚РѕРІ:\n1. РџРѕ Id\n2. РџРѕ Mark\n3. РџРѕ Name\nРЎРѕСЂС‚РёСЂРѕРІР°С‚СЊ РїРѕ(1, 2, 3): ";
 	cin >> criterion;
 	switch (criterion) {
 	case 1:
 		for (int i = 0; i < n; ++i) {
 			for (int j = 0; j < n - 1 - i; ++j) {
 				if (Students[j].Id > Students[j + 1].Id) {
-					swap = Students[j].Id;
-					Students[j].Id = Students[j + 1].Id;
-					Students[j + 1].Id = swap;
+					Swapst(Students[j], Students[j + 1]);
 				}
 			}
 		}
@@ -70,9 +70,7 @@ int main()
 		for (int i = 0; i < n; ++i) {
 			for (int j = 0; j < n - 1 - i; ++j) {
 				if (Students[j].Mark > Students[j + 1].Mark) {
-					swap = Students[j].Mark;
-					Students[j].Mark = Students[j + 1].Mark;
-					Students[j + 1].Mark = static_cast<Grade>(swap);
+					Swapst(Students[j], Students[j + 1]);
 				}
 			}
 		}
@@ -80,43 +78,23 @@ int main()
 	case 3:
 		for (int i = 0; i < n; ++i) {
 			for (int j = 0; j < n - 1 - i; ++j) {
-				for (int k = 0; k < 7; k++) {
-
-					if (Students[j].Name[k] > Students[j + 1].Name[k]) {
-						for (int l = 0; l < 7; ++l) {
-							ChSwap[l] = Students[j].Name[l];
-						};
-						for (int l = 0; l < 7; ++l) {
-							Students[j].Name[l] = Students[j + 1].Name[l];
-							Students[j + 1].Name[l] = ChSwap[l];
-						}
-						break;
+				
+					if (static_cast<int>(Students[j].Name[0]) > static_cast<int>(Students[j + 1].Name[0])) {
+						Swapst(Students[j], Students[j + 1]);
 					}
-					else if (Students[j].Name[k] < Students[j + 1].Name[k]) {
-						break;
-					}
-
-				}
+					
 			}
 		}
 		break;
 	}
-	for (int i = 0; i < n; ++i) {
-		switch (criterion) {
-		case 1:
-			cout << Students[i].Id << endl;
-			break;
-		case 2:
-			cout << Students[i].Mark << endl;
-			break;
-		case 3:
-			cout << Students[i].Name << endl;
-			break;
-		}
+	for (int i = 0; i < n; ++i) {		
+			cout << left<< "id: "<< setw(4)<<Students[i].Id <<"   mark: "<< Students[i].Mark<< "   name: " <<setw(6)  << Students[i].Name << endl;
 	}
 
 
 	//moda
+	int count[5] = { 0,0,0,0,0 };
+	int moda = 1;
 	for (int i = 0; i < n; ++i) {
 		switch (static_cast<int>(Students[i].Mark)) {
 		case 1:
@@ -156,7 +134,7 @@ int main()
 	for (int i = 0; i < 4; ++i) {
 		sum = sum + count[i];
 		if (sum > 25) {
-			cout << "Вам нужно получить оценку: " << i + 2 << ", чтобы быть лучше 25%." << endl;     
+			cout << "Р’Р°Рј РЅСѓР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ РѕС†РµРЅРєСѓ: " << i + 2 << ", С‡С‚РѕР±С‹ Р±С‹С‚СЊ Р»СѓС‡С€Рµ 25%." << endl;     
 			sum = 0;
 			break;
 		}
@@ -164,21 +142,23 @@ int main()
 	for (int i = 0; i < 4; ++i) {
 		sum = sum + count[i];
 		if (sum > 50) {
-			cout << "Вам нужно получить оценку: " << i + 2 << ", чтобы быть лучше 50%." << endl;     
+			cout << "Р’Р°Рј РЅСѓР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ РѕС†РµРЅРєСѓ: " << i + 2 << ", С‡С‚РѕР±С‹ Р±С‹С‚СЊ Р»СѓС‡С€Рµ 50%." << endl;     
 			sum = 0;
 			break;
 		}
 	}
+	bool b75 = true;
 	for (int i = 0; i < 4; ++i) {
 		sum = sum + count[i];
 		if (sum > 75) {
-			cout << "Вам нужно получить оценку: " << i + 2 << ", чтобы быть лучше 75%." << endl;    
+			
+			cout << "Р’Р°Рј РЅСѓР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ РѕС†РµРЅРєСѓ: " << i + 2 << ", С‡С‚РѕР±С‹ Р±С‹С‚СЊ Р»СѓС‡С€Рµ 75%." << endl;    
 			sum = 0;
 			b75 = false;
 			break;
 		}
 	}
-	if (b75){ cout << "Вам нужно получить оценку: 5, чтобы быть лучше 75%." << endl; }
+	if (b75){ cout << "Р’Р°Рј РЅСѓР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ РѕС†РµРЅРєСѓ: 5, С‡С‚РѕР±С‹ Р±С‹С‚СЊ Р»СѓС‡С€Рµ 75%." << endl; }
 
 
 }
