@@ -1,0 +1,37 @@
+#include
+
+using namespace std;
+
+int main()
+{
+int n, c, sum, N;
+cin >> n;
+for (int i = 1; i < n; i++)
+{
+cin >> c;
+N = c % 10;
+for (int j = 1; j < 13; j++)
+{
+c = c / 10;
+if (j % 2 != 0)
+{
+sum += c % 10 * 3;
+}
+else
+{
+sum += c % 10 * 1;
+}
+}
+if (N = (10 - sum % 10))
+{
+cout << "valid" << endl;
+}
+else
+{
+cout << "invalid" << endl;
+}
+sum = 0;
+c = 0;
+N = 0;
+}
+}
