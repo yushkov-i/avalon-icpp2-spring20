@@ -1,0 +1,177 @@
+#include <iostream>
+#include "Extention.hpp"
+
+using namespace std;
+using namespace ext;
+
+enum Grade
+{
+	F = 1,   // неявка
+	D = 2,  // неудовлетворительно
+	C = 3,  // удовлетворительно
+	B = 4,  // хорошо
+	A = 5,  // отлично      
+};
+
+struct Student
+{
+	int Id;
+	Grade Mark;
+	char Name[7];
+};
+
+int main()
+{
+	setlocale(0, "");
+	const int n = 100;
+	Student students[n];
+	
+	//Задание 1
+	unsigned short int choice_of_sortirovka = 0;
+	
+	for (int i = 0; i < n; i++)
+	{
+		students[i].Id = GetRandomValue(1, 1000);
+		students[i].Mark = static_cast<Grade>(GetRandomValue(1, 5));
+		int tempLength = GetRandomValue(3, 6);
+		for (int j = 0; j < tempLength; ++j)
+		{
+			int symbol = GetRandomValue('a', 'z');
+			students[i].Name[j] = symbol;
+		}
+
+		for (int j = tempLength; j < 7; ++j)
+		{
+			students[i].Name[j] = '\0';
+		}
+
+		cout << students[i].Id << " " << students[i].Mark << " " << students[i].Name << endl;
+	}
+	
+	cout << endl << "1 - сортировка по Id, 2 - по Mark, 3 - по Name";
+	cin >> choice_of_sortirovka;
+
+	if (choice_of_sortirovka == 1)
+	{
+		for (int i = 0; i < n - 1; i++)
+
+		{
+			bool flag = false; 
+
+			for (int j = 0; j < n - 1 - i; j++)
+			{
+				if (students[j].Id > students[j + 1].Id)
+				{
+					Student exchange = students[j];
+					students[j] = students[j + 1];
+					students[j + 1] = exchange;
+					
+					flag = true;
+				}
+			}
+			if (not flag) break;
+		}
+		for (int i = 0; i < n - 1; i++) cout << students[i].Id << " " << students[i].Mark << " " << students[i].Name << endl;
+	}
+	else if (choice_of_sortirovka == 2)
+	{
+		for (int i = 0; i < n - 1; i++)
+
+		{
+			bool flag = false;
+
+			for (int j = 0; j < n - 1 - i; j++)
+			{
+				if (students[j].Mark > students[j + 1].Mark)
+				{
+					Student exchange = students[j];
+					students[j] = students[j + 1];
+					students[j + 1] = exchange;
+
+					flag = true;
+				}
+			}
+
+			if (not flag) break;
+	    }
+		for (int i = 0; i < n - 1; i++) cout  << students[i].Mark << " " << students[i].Id << " " << students[i].Name << endl;
+	}
+	else
+	{
+		for (int i = 0; i < n - 1; i++)
+
+		{
+			bool flag = false;
+
+			for (int j = 0; j < n - 1 - i; j++)
+			{
+				if (students[j].Name[0] > students[j + 1].Name[0])
+				{
+					Student exchange = students[j];
+					students[j] = students[j + 1];
+					students[j + 1] = exchange;
+					flag = true;
+
+				}
+			}
+
+			if (not flag) break;
+		}
+		for (int i = 0; i < n - 1; i++)  cout << students[i].Name <<  " " << students[i].Id << " " << students[i].Mark << endl;
+	}
+		
+	cout << endl << endl << endl;
+
+	// Задание 2
+	int moda[2], k = 0, sum = 0, index[75];
+	
+	for (int i = 1; i < 6; i++)
+	{
+		int locmoda = 0;
+		for (int j = 0; j < n; j++)
+		{
+			if (students[j].Mark == static_cast<Grade>(i)) locmoda += 1;
+		}
+				
+		if (locmoda > moda[0])
+		{
+			moda[0] = locmoda;
+			moda[1] = i;
+		}
+			
+	}
+
+	
+	cout << "Мода оценок: " << moda[1] << endl;;
+	
+	do
+	{
+		bool no_povt = true;
+		int i = 0;
+		do
+		{
+			i = GetRandomValue(0, 99);
+			for (int j = 0; j < k; j++)
+			{
+				if (index[j] = i)
+					no_povt = false;
+				break;
+			}
+		} while (no_povt = false);
+		
+		index[k] = i;
+		sum += students[i].Mark;
+		
+		if (k == 24 || k == 49 || k == 74)
+		{
+			cout << k + 1 << "% студентов учатся на " << sum / k << "-ки. Для того, чтобы их превзойти вам нужно получать " << sum / k + 1 << "-ки." << endl;
+		}
+
+		k++;
+	} while (k != 75);
+
+	cout << endl << endl;
+	}
+
+	
+
