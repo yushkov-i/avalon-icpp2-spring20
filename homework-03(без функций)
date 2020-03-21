@@ -1,0 +1,82 @@
+#include <iostream>
+#include "Extention.hpp"
+
+using namespace std;
+using namespace ext;
+
+int main()
+{
+	setlocale(0, "");
+	int agents_money[10][12], maxmedian[2];
+
+	for (int i = 0; i < 10; i++)
+	{
+		int locmedian = 0, minus = 0, work = 0;
+		cout << "Агент " << i << ":" << endl;
+		
+		for (int j = 0; j < 12; j++)
+		{
+		 
+			if (work != 2) 
+			{
+				work = GetRandomValue(0, 1); // заполнение месяцев, которые агент не работал
+				if (work == 0)
+				{
+					int k = GetRandomValue(1, 6); // от 1 до 6, чтобы агент работал хотя бы половину года
+					for (int g = j; g < k + j; g++)
+					{
+						agents_money[i][g] = -1;
+						cout << agents_money[i][g] << " ";
+						minus += 1;
+					}
+					j += k;
+					work = 2;
+				}
+			}
+		
+
+			agents_money[i][j] = GetRandomValue(1000, 100000); 
+			cout << agents_money[i][j] << " ";
+			
+		}
+
+		cout << endl;
+
+		//сортировка значений заработка по возрастанию
+		for (int j = 0; j < 11; j++) 
+		{
+			for (int g = 0; g < 11 - j; g++)
+			{
+				if (agents_money[i][g] > agents_money[i][g + 1])
+				{
+					int exchange = agents_money[i][g];
+					agents_money[i][g] = agents_money[i][g + 1];
+					agents_money[i][g + 1] = exchange;
+				}
+			}
+		}
+
+		for (int j = 0; j < 12; j++)
+			cout << agents_money[i][j] << " ";
+		
+		//  определение медианы
+		int mid_index = ((12 - minus) / 2);
+
+		if ((12 - minus) % 2 == 0)
+			locmedian = (agents_money[i][minus + mid_index] + agents_money[i][minus + mid_index - 1]) / 2;
+		else
+			locmedian = agents_money[i][minus + mid_index];
+		
+		
+		cout << " | " << locmedian << " " << minus << " " << mid_index << endl << endl; 
+		
+		//определение наибольшей медианы
+		if (locmedian > maxmedian[0])
+		{
+			maxmedian[0] = locmedian;
+			maxmedian[1] = i;
+		}
+	}
+
+	cout << "Лучшее медианное значение у агента номер " << maxmedian[1] << ": " << maxmedian[0];
+	}
