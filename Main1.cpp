@@ -20,6 +20,23 @@ int* init(int mas[][12]) {
 	}
 	return mas[12];
 }
+int* initial(int mas[][12]) {
+	int n = GetRandomValue(0, 5);
+	for (int i = 0; i < n; i++) {
+		int k = GetRandomValue(0, 9);
+		if (k % 2 == 0) {
+			for (int l = 0; l < 6; l++) {
+				mas[k][l] = -1;
+			}
+		}
+		if(k % 2 != 0) {
+			for (int l = 6; l < 12; l++) {
+				mas[k][l] = -1;
+			}
+		}
+	}
+	return mas[12];
+}
 double median(int mas[12]) {
 	double mediana;
 	int n = 0;
@@ -38,7 +55,7 @@ double median(int mas[12]) {
 		mediana = mas1[(n + 1) / 2 - 1];
 	}
 	if ((n % 2) == 0) {
-		mediana = (mas1[n / 2 - 1] + mas1[n/ 2]) / 2.;
+		mediana = (mas1[n / 2 - 1] + mas1[n / 2]) / 2.;
 	}
 	return mediana;
 }
@@ -46,6 +63,7 @@ int main() {
 	int salary[10][12];
 	initialization(salary);
 	init(salary);
+	initial(salary);
 	cout << "Revenues of agents by months:" << endl;
 	for (int i = 0; i < 10; i++) {
 		cout << i + 1 << " agent: ";
@@ -68,5 +86,6 @@ int main() {
 		}
 	}
 	cout << "\nThe highest median of monthly revenue value has agent number " << max_i + 1 << ", it is " << max_mediana;
+	system("pause");
 	return 0;
 }
