@@ -5,8 +5,8 @@ using namespace std;
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    printf("Тип переменной\t\t|\tРазмер,\t  |\t\t    Значение\t\t       |  Количество\n");
-    printf("\t\t\t|\tбайт\t  |\tМинимальное     |      Максимальное    | значимых бит\n");
+    printf("РўРёРї РїРµСЂРµРјРµРЅРЅРѕР№\t\t|\tР Р°Р·РјРµСЂ,\t  |\t\t    Р—РЅР°С‡РµРЅРёРµ\t\t       |  РљРѕР»РёС‡РµСЃС‚РІРѕ\n");
+    printf("\t\t\t|\tР±Р°Р№С‚\t  |\tРњРёРЅРёРјР°Р»СЊРЅРѕРµ     |      РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ    | Р·РЅР°С‡РёРјС‹С… Р±РёС‚\n");
     for (int i = 0; i < 107; i++) cout << "-";
     cout << endl;
     printf("bool\t\t\t|\t\t %d|\t\t       %d|\t\t      %d|\t\t %d|\n", sizeof(bool), numeric_limits<bool>::min(), numeric_limits<bool>::max(), sizeof(bool));
