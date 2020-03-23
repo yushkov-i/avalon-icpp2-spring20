@@ -163,21 +163,21 @@ namespace ext
 			return Season::Autumn;
 		}
 	}
-	
+
 	Season getSeason(Date date) {
-		return getSeason(date.month);		
-	} 
-	
+		return getSeason(date.month);
+	}
+
 
 	/*
 		Написать перегрузку для следующих логических операторов
 	*/
-    bool operator == (const Date lhs, const Date rhs) {
-		return lhs.year == rhs.year 
-			&& lhs.month == rhs.month 
+	bool operator == (const Date lhs, const Date rhs) {
+		return lhs.year == rhs.year
+			&& lhs.month == rhs.month
 			&& lhs.day == rhs.day;
 
-		
+
 		if (lhs.year == rhs.year) {
 			if ((static_cast<int>(lhs.month) == (static_cast<int>(rhs.month)))) {
 				if (lhs.day == rhs.day) {
@@ -195,7 +195,7 @@ namespace ext
 			return 0;
 		}
 	}
-	bool operator != (const Date lhs, const Date rhs) {	
+	bool operator != (const Date lhs, const Date rhs) {
 		if (!(lhs == rhs)) {
 			return 1;
 		}
@@ -254,15 +254,15 @@ namespace ext
 		else {
 			return 0;
 		}
-	} 
+	}
 
 	Date countGrig(TimeDelta delta) {
 		int a = delta.delta + 32044,
-		b = (4 * a + 3) / 146097,
-		c = a - (146097 * b) / 4,
-		d = (4 * c + 3) / 1461,
-		e = c - (1461 * d) / 4,
-		m = (5 * e + 2) / 153;
+			b = (4 * a + 3) / 146097,
+			c = a - (146097 * b) / 4,
+			d = (4 * c + 3) / 1461,
+			e = c - (1461 * d) / 4,
+			m = (5 * e + 2) / 153;
 		Date x{};
 		x.day = e - (153 * m + 2) / 5 + 1;
 		x.month = static_cast<Month>(m + 3 - 12 * (m / 10));
@@ -284,7 +284,7 @@ namespace ext
 
 	TimeDelta operator + (const TimeDelta lhs, const TimeDelta rhs) {
 		return TimeDelta{ lhs.delta + rhs.delta };
-	} 
+	}
 
 	TimeDelta operator * (const TimeDelta delta, int multiplier) {
 		TimeDelta num = delta;
@@ -297,27 +297,52 @@ namespace ext
 	/*----------homework-05----------*/
 
 	TimeDelta operator ++ (TimeDelta& delta) {
-		return delta++;
+		TimeDelta tmp;
+		tmp.delta = 1;
+		return delta + tmp;
 	}
 
 	TimeDelta operator ++ (TimeDelta& delta, int) {
-		return ++delta;
+		TimeDelta tmp = delta;
+		delta++;
+		return tmp;
 	}
 
 	TimeDelta operator -- (TimeDelta& delta) {
-		return delta--;
+		TimeDelta tmp;
+		tmp.delta = -1;
+		return delta + tmp;
 	}
 	TimeDelta operator -- (TimeDelta& delta, int) {
-		return --delta;
+		TimeDelta tmp = delta;
+		delta--;
+		return tmp;
 	}
 
 	Date operator ++ (Date& delta) {
-		return delta++;
+		TimeDelta tmp;
+		tmp.delta = 1;
+		delta = delta + tmp;
+		return delta;
 	}
-	Date operator ++ (Date& delta, int);
 
-	Date operator -- (Date& delta);
-	Date operator -- (Date& delta, int);
+	Date operator ++ (Date& delta, int) {
+		Date tmp = delta;
+		delta++;
+		return tmp;
+	}
+
+	Date operator -- (Date& delta) {
+		TimeDelta tmp;
+		tmp.delta = -1;
+		delta = delta + tmp;
+		return delta;
+	}
+	Date operator -- (Date& delta, int) {
+		Date tmp = delta;
+		delta--;
+		return tmp;
+	}
 
 	/*
 		Меняет даты местами
