@@ -1,0 +1,23 @@
+#include <iostream>
+#include <limits>
+using namespace std;
+
+int main()
+{
+	setlocale(0, "");
+	char a[] = "";
+	
+	printf("Тип переменной %-10s|%3s Размер, %-2s| %10s Значение %-10s | Количество \n", a, a, a, a, a, a);
+	printf("%-24s | %3s байт %-3s |%2sМинимальное%-2s|  Максимальное  | Значимых бит \n", a, a, a, a, a, a);
+	for (int i = 0; i < 29; i++) printf("---");
+
+	printf("\nbool \t\t\t | \t %7d| \t %7d| \t %8d|\t %6d|", sizeof(bool), numeric_limits<bool>::min(), numeric_limits<bool>::max(), numeric_limits<bool>::digits);
+	printf("\nunsigned short \t\t | \t %7u| \t %7u| \t %8u|\t %6u|", sizeof(unsigned short), numeric_limits<unsigned short>::min(), numeric_limits<unsigned short>::max(), numeric_limits<unsigned short>::digits);
+	printf("\nshort \t\t\t | \t %7d| \t %7d| \t %8d|\t %6d|", sizeof(short), numeric_limits<short>::min(), numeric_limits<short>::max(), numeric_limits<short>::digits);
+	printf("\nunsigned int \t\t | \t %7u| \t %7u| %4s %u|\t %6u|", sizeof(unsigned int), numeric_limits<unsigned int>::min(), a, numeric_limits<unsigned int>::max(), numeric_limits<unsigned int>::digits);
+	printf("\nint \t\t\t | \t %7d| %14d| %15d|\t %6d|", sizeof(int), numeric_limits<int>::min(), numeric_limits<int>::max(), numeric_limits<int>::digits);
+	printf("\nunsigned long \t\t | \t %7d| %14d| %4s %u|\t %6d|", sizeof(unsigned long), numeric_limits<unsigned long>::min(), a, numeric_limits<unsigned long>::max(), numeric_limits<unsigned long>::digits);
+	printf("\nlong \t\t\t | \t %7d| %14d| %4s %d|\t %6d|", sizeof(long), numeric_limits<long>::min(), a, numeric_limits<long>::max(), numeric_limits<long>::digits);
+	printf("\nunsigned long long \t | \t %7d| %14d| %4s %u|\t %6u|", sizeof(unsigned long long), numeric_limits<unsigned long long>::min(), a, numeric_limits<unsigned long long>::max(), numeric_limits<unsigned long long>::digits);
+	printf("\long long \t | \t %7d| %14d| %4s %d|\t %6u|", sizeof(long long), numeric_limits<long long>::min(), a, numeric_limits<long long>::max(), numeric_limits<long long>::digits);
+}
