@@ -16,13 +16,15 @@ void Print(int* arr, int y, int x)
 
 	}
 	cout << endl;
+	cout << "--------------------------------------" << endl;
 }
 
 
 int main()
 {
+	setlocale(0, "");
 	const int agents = 10;
-	const int days = 12; 
+	const int days = 13; // я увеличил размер массива на 1 для хранения числа оплаченных рабочих дней
 	int paymentOfagentsInDays[agents][days];
 	int varietyofwork;
 
@@ -30,27 +32,30 @@ int main()
 	//заполнение массива
 	for (int i = 0; i < agents; i++)
 	{
-		for (int j = 0; j < 12; j++)
+		for (int j = 0; j < days; j++)
 		{
-			varietyofwork = rand() %3;
-			if (varietyofwork  != 2)
-				paymentOfagentsInDays[i][j] = rand() % 100000 + 2000;
+			if (j == 12)
+				paymentOfagentsInDays[i][j] = 0;
 			else
-				paymentOfagentsInDays[i][j] = -1;
+			{
+				varietyofwork = rand() % 3;
+				if (varietyofwork != 2)
+					paymentOfagentsInDays[i][j] = rand() % 100000 + 2000;
+				else
+					paymentOfagentsInDays[i][j] = -1;
+			}
 		}
 	}
 
 	Print(&paymentOfagentsInDays[0][0], agents, days);
 	
-	cout << "--------------------------------------" << endl;
-
-
+	//сортировка
 	for (int g = 0; g < agents; g++)
 	{
 		for (int i = 0; i < agents; i++)
 		{
-
-			for (int j = 0; j < days-1  ; j++)
+			bool isSwap = false;
+			for (int j = 0; j < days-2  ; j++)
 			{
 				if (paymentOfagentsInDays[i][j] < paymentOfagentsInDays[i][j + 1])
 				{
@@ -59,19 +64,42 @@ int main()
 					paymentOfagentsInDays[i][j] = paymentOfagentsInDays[i][j + 1];
 					paymentOfagentsInDays[i][j + 1] = temp3;
 				}
-
-
+				else
+					isSwap = true;
 			}
-
+			if (!isSwap)
+				break;
 		}
 	}
 
 	Print(&paymentOfagentsInDays[0][0], agents, days);
 
-	cout << "--------------------------------------" << endl;
-
+	//подсчет рабочих дней
+	for (int i = 0; i < agents; i++)
+	{
+		int daycheck = 0;
+		for (int j = 0; j < days - 1; j++)
+		{
+			if (paymentOfagentsInDays[i][j] == -1)
+			{
+				paymentOfagentsInDays[i][12] = j;
+				break;
+			}
+			else
+				daycheck += 1;
+			if (daycheck == days - 1)
+				paymentOfagentsInDays[i][12] = 12;
+		}
+	}
 	
-
+	Print(&paymentOfagentsInDays[0][0], agents, days);
 	
-	
+	//подсчет медиан
+	for (int i = 0; i < agents; i++)
+	{
+		if (paymentOfagentsInDays[i][days-1] % 2 == 0)
+			cout << "Медиана зарплаты агента номер - " << i + 1 << " равна : " << (paymentOfagentsInDays[i][paymentOfagentsInDays[i][days-1] / 2 -1] + paymentOfagentsInDays[i][paymentOfagentsInDays[i][days-1] / 2])/2 << endl;
+		else
+			cout << "Медиана зарплаты агента номер - " << i + 1 << " равна : " << paymentOfagentsInDays[i][paymentOfagentsInDays[i][days-1] / 2] << endl;
+	}
 }
