@@ -53,12 +53,12 @@ namespace ext
 
 	TimeDelta countJND(Date date) {
 		int a, y, m;
-		TimeDelta jdn;
+		TimeDelta jnd;
 		a = (14 - date.month) / 12;
 		y = date.year + 4800 - a;
 		m = date.month + 12 * a - 3;
-		jdn.delta = date.day + (153 * m + 2) / 5 + 365 * y + y / 4 - y / 100 + y / 400 - 32045;
-		return jdn;
+		jnd.delta = date.day + (153 * m + 2) / 5 + 365 * y + y / 4 - y / 100 + y / 400 - 32045;
+		return jnd;
 	};
 
 	TimeDelta countDistance(Date from, Date to) {
@@ -200,11 +200,12 @@ namespace ext
 		date.year = 100 * b + d - 4800 + m / 10;
 		return date;
 	}
-	
+
 	Date operator + (const Date date, const TimeDelta delta)
 	{
-		TimeDelta JDN = countJND(date) + delta;
-		return JNDToDate(JDN);
+		TimeDelta JND;
+		JND.delta = countJND(date).delta + delta.delta;
+		return JNDToDate(JND);
 	}
 
 	Date operator + (const TimeDelta delta, const Date date)
