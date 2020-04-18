@@ -35,6 +35,6 @@ int main() {
 		}
 	}
 	cout << "Closest date to entered date: " << closest.day << "." << closest.month << "." << closest.year << endl;
-	cout << "Furthest date to entered date: " << MostFar.day << "." << MostFar.month << "." << MostFar.year << endl;
+	cout << "Most far date to entered date: " << MostFar.day << "." << MostFar.month << "." << MostFar.year << endl;
 	system("pause");
 }
