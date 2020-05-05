@@ -33,4 +33,7 @@ int main() {
 		tmp = tmp->Next;
 	}
 	cout << "\"" << endl;
+	fifth->Next = nullptr;
+	delete sixth;
+	cout << "Строка: " << removeChars(first, 3, 2);
 }
