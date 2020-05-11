@@ -8,6 +8,12 @@ namespace ext
 		Node* Next;
 	};
 
+	struct NodeDoub {
+		char symb;
+		NodeDoub* Next;
+		NodeDoub* Prev;
+	};
+
 	char characterAt(Node* head, int pos) {
 		int count{};
 		Node* curr = head;
@@ -60,4 +66,19 @@ namespace ext
 		return tmp;
 	}
 
+	NodeDoub* concatenate(NodeDoub* a, NodeDoub* b) {
+		NodeDoub* tmp = a;
+		while (tmp->Next != nullptr) {
+			tmp->Next->Prev = tmp;
+			tmp = tmp->Next;
+		}
+		if (tmp->Next == nullptr) {
+			tmp->Next = b;
+		}
+		while (tmp != a->Next) {
+			tmp = tmp->Prev;
+		}
+		tmp = tmp->Prev;
+		return tmp;
+	}
 }
