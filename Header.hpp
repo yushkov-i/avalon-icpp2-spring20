@@ -74,11 +74,35 @@ namespace ext
 		}
 		if (tmp->Next == nullptr) {
 			tmp->Next = b;
+			tmp->Next->Prev = tmp;
 		}
 		while (tmp != a->Next) {
 			tmp = tmp->Prev;
 		}
 		tmp = tmp->Prev;
+		return tmp;
+	}
+
+	NodeDoub* substring(NodeDoub* orig, int start, int length) {
+		NodeDoub* tmp = orig;
+		start--;
+		int tmp_curr{};
+		while (tmp_curr < start) {
+			tmp_curr++;
+			tmp = tmp->Next;
+		}
+		tmp->Prev = nullptr;
+		tmp_curr = 1;
+		while (tmp_curr != length) {
+			tmp_curr++;
+			if (tmp->Next != nullptr) {
+				tmp = tmp->Next;
+			}
+		}
+		tmp->Next = nullptr;
+		while (tmp->Prev != nullptr) {
+			tmp = tmp->Prev;
+		}
 		return tmp;
 	}
 }
