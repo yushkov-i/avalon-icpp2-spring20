@@ -70,6 +70,18 @@ int main() {
 	NodeDoub* custom2 = &cust2[0];
 	NodeDoub* tmpp = concatenate(custom1, custom2);
 	custom1 = tmpp;
+	cout << "Строка, состоящая из двух предыдущих: ";
+	while (custom1 != nullptr) {
+		cout << custom1->symb;
+		custom1 = custom1->Next;
+	}
+	cout << endl;
+	int start_sub, length_sub;
+	cout << "Введите начальную позицию и длину части строки: ";
+	cin >> start_sub >> length_sub;
+	NodeDoub* sub_str = substring(tmpp, start_sub, length_sub);
+	cout << "Часть строки, заданная параметрами: "; 
+	custom1 = sub_str;
 	while (custom1 != nullptr) {
 		cout << custom1->symb;
 		custom1 = custom1->Next;
