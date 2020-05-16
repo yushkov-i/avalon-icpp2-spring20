@@ -23,7 +23,7 @@ namespace ext
 		int size = countSize(data);
 
 		char* temp = new char[size];
-		//	temp = data; неправильно!!!
+		//	temp = data; Г­ГҐГЇГ°Г ГўГЁГ«ГјГ­Г®!!!
 
 		for (int i = 0; i < size - 1; ++i)
 		{
@@ -100,12 +100,6 @@ namespace ext
 				temp[c] = data[i];
 				c++;
 			}
-			if (i == size - 1 && c1 != size1)
-			{
-				temp[c] = data[i];
-				c++;
-			}
-			c1 = 0;
 		}
 		temp[c] = '\0';
 		return temp;
