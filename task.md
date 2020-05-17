@@ -1,10 +1,10 @@
 Реализовать следующий функции для работы с динамическими строками.<br>
 __Динамические строки необходимо хранить в памяти как связанный список символов.__
 
-struct Node<br>
+struct SymbolNode<br>
 {<br>
-  char symbol;<br>
-  Node * nextNode;<br>
+		char value;<br>
+		SymbolNode * nextNode;<br>
 };<br>
 
   __characterAt__ - функция принимает два аргумента: динамическую строку, число.
