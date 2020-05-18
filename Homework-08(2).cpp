@@ -31,7 +31,7 @@ int main() {
 	}
 	int Num;
 	Triangle_ifstream >> Num;
-	const int Kol_vo_triangle = Num;   // -не сработало
+	const int Kol_vo_triangle = Num;   // -Г­ГҐ Г±Г°Г ГЎГ®ГІГ Г«Г®
 	Tringle_struct *Triangle = new Tringle_struct[KOL_VO_TRIANGLE];
 	for (int i = 0; i < Num; i++) {
 		Triangle_ifstream >> Triangle[i].id;
@@ -48,7 +48,7 @@ int main() {
 		return 2;
 	}
 	Colours_ifstream >> Num;
-	//const int NUMBER_OF_COLOUR = Num; // -не сработало
+	//const int NUMBER_OF_COLOUR = Num; // -Г­ГҐ Г±Г°Г ГЎГ®ГІГ Г«Г®
 	Colour_Info *Colour = new Colour_Info[KOL_VO_COLOUR];
 	for (int i = 0; i < KOL_VO_COLOUR; i++) {
 		Colours_ifstream >> Colour[i].id_colour;
@@ -64,12 +64,13 @@ int main() {
 		}
 	}
 	for (int i = 0; i < Kol_vo_triangle; i++) {
-		for (int j = 0; j < KOL_VO_COLOUR; j++) {
+		Colour_Triangle[Triangle[i].colour - 1] << Triangle[i].id << ' ' << Triangle[i].a << ' ' << Triangle[i].b << ' ' << Triangle[i].c << ' ' << Triangle[i].a + Triangle[i].b + Triangle[i].c << '\n';
+		/*for (int j = 0; j < KOL_VO_COLOUR; j++) {
 			if (Triangle[i].colour - 1 == Colour[j].id_colour - 1) {
 				Colour_Triangle[j] << Triangle[i].id << ' ' << Triangle[i].a << ' ' << Triangle[i].b << ' ' << Triangle[i].c << ' ' << Triangle[i].a + Triangle[i].b + Triangle[i].c << '\n';
 				break;
 			}
-		}
+		}*/
 	}
 	delete[] Triangle;
 	delete[] Colour;
