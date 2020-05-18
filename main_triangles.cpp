@@ -63,4 +63,5 @@ int main()
 	trian_col = nullptr;
 	trian_list = nullptr;
 	colours_list = nullptr;
+	cout << "Готово! Проверьте созданные файлы в корневой папке проекта.";
 }
