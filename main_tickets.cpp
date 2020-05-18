@@ -57,6 +57,6 @@ int main() {
 	tickets_file.close();
 	lucky.close();
 	unlucky.close();
-	cout << "Ïðîâåðêà âûïîëíåíà, ïðîâåðüòå ôàéëû 'lucky.txt' è 'unlucky.txt'";
+	cout << "ÃÃ°Ã®Ã¢Ã¥Ã°ÃªÃ  Ã¢Ã»Ã¯Ã®Ã«Ã­Ã¥Ã­Ã , Ã¯Ã°Ã®Ã¢Ã¥Ã°Ã¼Ã²Ã¥ Ã´Ã Ã©Ã«Ã» 'lucky.txt' Ã¨ 'unlucky.txt'";
 	return 0;
 }
