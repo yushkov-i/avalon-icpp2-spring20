@@ -45,7 +45,5 @@ int main()
 	fileInBin.open("point.bin", iostream::binary); // открываем файл для чтения в бинарном формате
 	Point pp[5]; // сюда будем записывать результат чтения из файла
 	
-	fileInBin.read(reinterpret_cast<char*>(pp), POINT_DATA_SIZE * 5); // чтение из файла
-
-	
+	fileInBin.read(reinterpret_cast<char*>(pp), POINT_DATA_SIZE * 5); // чтение из файла	
 }
