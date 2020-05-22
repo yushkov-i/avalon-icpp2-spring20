@@ -1,9 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <limits>
 using namespace std;
-
 const string TICKETS_FILE_NAME = "tickets.txt";
 const string LUCKY_FILE_NAME = "lucky.txt";
 const string UNLUCKY_FILE_NAME = "unlucky.txt";
@@ -65,6 +63,9 @@ int main()
 			count_unlucky++;
 		}
 	}
+	LuckyFile.close();
+	UnluckyFile.close();
 	cout << "Count of lucky numbers: " << count_lucky << endl;
 	cout << "Count of unlucky numbers: " << count_unlucky << endl;
+	return 0;
 }
