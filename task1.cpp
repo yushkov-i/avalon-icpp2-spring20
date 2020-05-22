@@ -66,5 +66,4 @@ int main()
 	UnluckyFile.close();
 	cout << "Count of lucky numbers: " << count_lucky << endl;
 	cout << "Count of unlucky numbers: " << count_unlucky << endl;
-	return 0;
 }
