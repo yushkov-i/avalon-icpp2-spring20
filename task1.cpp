@@ -33,7 +33,7 @@ int main()
 	for (int i = 0; i < tickets_count; i++)
 	{
 		ticketsFile >> tickets[i];
-		ticketsFile.ignore(std::numeric_limits<int>::max(), '\n');
+		ticketsFile.ignore();
 	}
 	ticketsFile.close();
 	int count_lucky = 0, count_unlucky = 0;
