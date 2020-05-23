@@ -23,12 +23,39 @@ int main() {
 	}
 	/*задание 1*/
 	size_t id;
-	cout << TRIANGLE_DATA_SIZE << ' ';
-	cout << "Введите порядковый номер треугольника (от 1 до 1000000): ";
+	cout << "Введите порядковый номер треугольника (от 0 до 999999): ";
 	cin >> id;
-	file_in_bin.seekg(id * TRIANGLE_DATA_SIZE);
-	cout << file_in_bin.tellg() << endl;
+	file_in_bin.seekg(id * TRIANGLE_DATA_SIZE / 2, ios::beg);
 	Triangle tmp[1];
 	file_in_bin.read(reinterpret_cast<char*>(tmp), TRIANGLE_DATA_SIZE);
-	cout << tmp[0].a << ' ' << tmp[0].b << ' ' << tmp[0].c << ' ' << tmp[0].thickness;
+	cout << "Длины сторон треугольника с индексом " << id << ": " << tmp[0].a << ", " << tmp[0].b << ", " << tmp[0].c << "; толщина: " << tmp[0].thickness << '.' << endl;
+	/*задание 2*/
+	cout << "Введите периметр искомого треугольника: ";
+	int perimetr, l = 0, r = 999999, mid;
+	cin >> perimetr;
+	bool flag = 0;
+	while ((l <= r) && (flag == 0)) {
+		mid = (l + r) / 2;
+		file_in_bin.seekg(0);
+		file_in_bin.seekg(mid * TRIANGLE_DATA_SIZE / 2, ios::beg);
+		file_in_bin.read(reinterpret_cast<char*>(tmp), TRIANGLE_DATA_SIZE);
+		if (tmp[0].a + tmp[0].b + tmp[0].c == perimetr) {
+			flag = 1;
+			break;
+		}
+		if (tmp[0].a + tmp[0].b + tmp[0].c > perimetr) {
+			r = mid - 1;
+		}
+		else {
+			l = mid + 1;
+		}
+	}
+	if (flag == 1) {
+		cout << "Длины сторон искомого треугольника: " << tmp[0].a << ", " << tmp[0].b << ", " << tmp[0].c << "; толщина: " << tmp[0].thickness << '.' << endl;
+	}
+	else {
+		cout << "Треугольник с заданными параметрами не найден.";
+	}
+	file_in_bin.close();
+	return 0;
 }
