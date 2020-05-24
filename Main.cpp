@@ -22,7 +22,7 @@ int main()
 		return 1;
 	}
 	Triangle triangle;
-	triangleFile.seekg(N * TRIANGLE_DATA_SIZE);
+	triangleFile.seekg((N - 1) * TRIANGLE_DATA_SIZE);
 	triangleFile.read(reinterpret_cast<char*>(&triangle), sizeof(Triangle));
 	triangleFile.close();
 	cout << "Information about a triangle N:" << endl;
