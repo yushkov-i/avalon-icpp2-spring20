@@ -8,7 +8,7 @@ struct Triangle
 	int c;
 	double thickness;
 };
-const double TRIANGLE_DATA_SIZE = sizeof(Triangle);
+const int TRIANGLE_DATA_SIZE = sizeof(Triangle);
 int main()
 {
 	int N;
