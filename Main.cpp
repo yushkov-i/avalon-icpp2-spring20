@@ -14,8 +14,8 @@ int main()
 	int N;
 	cout << "Enter N" << endl;
 	cin >> N;
-	fstream triangleFile;
-	triangleFile.open("triangle.bin", iostream::binary | iostream::ate | iostream::in);
+	ifstream triangleFile;
+	triangleFile.open("triangle.bin", iostream::binary);
 	if (!triangleFile.is_open())
 	{
 		cerr << "file did not open!";
