@@ -9,10 +9,10 @@ int main()
     int ticket = 0 , lucky = 0 , unlucky = 0; 
     ifstream Tiketsinput;
     Tiketsinput.open("tickets.txt");
-    ofstream luckOutput;
     luckOutput.open("lucky.txt");
-    ofstream unluckOutput;
     unluckOutput.open("unlucky.txt");
+    ofstream luckOutput;
+    ofstream unluckOutput;
     /*if (! Tiketsinput.is_open() || !luckOutput.is_open() || !unluckOutput.is_open()) {
         cout << "tickets.txt did not open!" << endl;
         return 1;
