@@ -1,0 +1,28 @@
+#include <fstream>
+#include <iostream>
+using namespace std;
+
+
+struct Triangle
+{
+    int a;
+    int b;
+    int c;
+    double thickness;
+};
+int main()
+{
+    int N;
+    cout << "N - ";
+    cin >> N;
+    ifstream TriangleInput;
+    TriangleInput.open("triangle.bin", ios::binary);
+    Triangle data;
+    TriangleInput.seekg((N-1) *  sizeof(Triangle));
+    TriangleInput.read(reinterpret_cast<char*>(&data), sizeof(Triangle));
+    cout << "information about triangle: " << endl;
+    cout << "a: " << data.a << endl;
+    cout << "b: " << data.b << endl;
+    cout << "c: " << data.c << endl;
+    cout << "thickness: " << data.thickness << endl;
+}
