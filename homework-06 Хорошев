@@ -1,0 +1,97 @@
+#pragma once
+
+namespace ext
+{
+    int countSize(char * data)
+    {
+        int size = 0;
+        while (data[size] != '\0')
+        {
+            ++size;
+        }
+
+        return size + 1;
+    }
+
+    char characterAt(char * data, int position)
+    {
+        return data[position - 1];
+    }
+
+    char * append(char * data, char symbol)
+    {
+        int size = countSize(data);
+
+        char * temp = new char[size + 1];
+        //	temp = data; неправильно!!!
+
+        for (int i = 0; i < size - 1; ++i)
+        {
+            temp[i] = data[i];
+        }
+
+        temp[size - 1] = symbol;
+        temp[size] = '\0';
+
+        return temp;
+    }
+    char * concatenate(char * data1, char * data2)
+    {
+        int size = countSize(data1)+countSize(data2);
+        char *  temp = new char [size + 1];
+        for (int i = 0; i < countSize(data1) - 1; ++i)
+        {
+            temp[i] = data1[i];
+        }
+        for (int j = countSize(data1); j < size; ++j) {
+            temp[j] = data1[j];
+        }
+        temp[size] = '\0';
+        return temp;
+    }
+    char * substring(char * data1, int pos, int weight)
+    {
+        char * temp = new char [weight + 1];
+        int k = 0;
+        for (int i = pos; i < weight+1; ++i) {
+            temp[k] = data1[i];
+            k++;
+        }
+        temp[weight+1]='\n';
+    }
+    char* replaceString(char* data1, char* pos, char* data2)
+    {
+        int size = countSize(data1);
+        int size1 = countSize(pos);
+        int size2 = countSize(data2);
+        char* temp = new char[100];
+        int c = 0;
+        int c1 = 0;
+        for (int i = 0; i < size - 1; i++)
+        {
+            int a = i;
+            for (int j = 0; j < size1 - 1; j++)
+            {
+                if (data1[a] == pos[j]) c1++;
+                a++;
+            }
+            if (c1 == size1 - 1)
+            {
+                for (int k = 0; k < size2 - 1; k++) {
+                    temp[c] = data2[k];
+                    c++;
+                }
+                i++;
+            }
+            else
+            {
+                temp[c] = data1[i];
+                c++;
+            }
+            c1 = 0;
+        }
+        temp[c] = '\0';
+        return temp;
+    }
+
+}
