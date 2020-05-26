@@ -1,1 +1,35 @@
+#include <fstream>
+#include <iostream>
+using namespace std;
 
+
+
+int main()
+{
+    int ticket = 0 , lucky = 0 , unlucky = 0; 
+    ifstream Tiketsinput;
+    Tiketsinput.open("tickets.txt");
+    unluckOutput.open("unlucky.txt");
+    luckOutput.open("lucky.txt");
+    ofstream luckyOutput;
+    ofstream unluckyOutput;
+    
+    /*if (! Tiketsinput.is_open() || !luckOutput.is_open() || !unluckOutput.is_open()) {
+        cout << "tickets.txt did not open!" << endl;
+        return 1;
+    }*/
+    for (int i = 0; i < 1000; i++){
+        Tiketsinput >> ticket;
+        if ((ticket / 100000 + ticket / 10000 % 10 + ticket / 1000 % 10) == (ticket / 100 % 10 + ticket / 10 % 10 + ticket % 10)) {
+            luckOutput << ticket << endl;
+            lucky++;
+        }
+        else{
+            unluckOutput << ticket << endl;
+            unlucky++;
+        }
+    }
+    cout << "Lucky tikets =  " << lucky << " ; unlucky tikets  = " << unluckCount << endl;
+
+
+}
