@@ -1,0 +1,92 @@
+#pragma once
+#include <iostream>
+
+namespace ext
+{
+    struct Node
+    {
+        char symbol;
+        Node * nextNode;
+    };
+
+    char characterAt(Node * mainNode, int index)
+    {
+        Node * currentNode = mainNode;
+        int count = 1;
+        while (count < index)
+        {
+            currentNode = currentNode->nextNode;
+            ++count;
+        }
+
+        return currentNode->symbol;
+    }
+
+    void append(Node * mainNode, char symbol)
+    {
+        Node * newNode = new Node{ symbol, nullptr };
+
+        Node * currentNode = mainNode;
+        while (currentNode->nextNode != nullptr)
+        {
+            currentNode = currentNode->nextNode;
+        }
+
+        currentNode->nextNode = newNode;
+    }
+
+    void print(Node * mainNode)
+    {
+        Node * currentPtr = mainNode;
+
+        do
+        {
+            std::cout << currentPtr->symbol;
+            currentPtr = currentPtr->nextNode;
+        } while (currentPtr != nullptr);
+    }
+
+    void removeChars(Node * mainNode, int index, int count)
+    {
+        if (index == 1)
+        {
+            removeChars(mainNode, 2, count - 1);
+            Node* temp = mainNode;
+            mainNode = mainNode->nextNode;
+            delete temp;
+            return;
+        }
+
+        Node* predNode = impl::getCharNodeAt(mainNode, index - 1);
+
+        int deleteCount = 0;
+
+        while (deleteCount != count)
+        {
+            Node* nodeToDelete = predNode->nextNode;
+            predNode->nextNode = nodeToDelete->nextNode;
+            ++deleteCount;
+        }
+    }
+
+    void concatenate(Node * firstNode, Node * secondNode){
+        while (firstNode->nextNode != nullptr) {
+            firstNode = firstNode->nextNode;
+        }
+        firstNode->nextNode = secondNode;
+    }
+
+    Node * substring(Node * str, int pos, int length)
+    {
+        for (int i = 1; i < pos; ++i) {
+            str = str->nextNode;
+        }
+        Node *finList = new Node{ str->symbol, str->nextNode };
+        str = finList;
+        for (int i = 1; i < length; ++i) {
+            str = str->nextNode;
+        }
+        str->nextNode = nullptr;
+        return finList;
+    }
+}
