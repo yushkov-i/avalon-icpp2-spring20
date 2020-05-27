@@ -1,0 +1,97 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <limits>
+using namespace std;
+
+const string colors_file_name = "colors.txt";
+const string triangles_file_name = "triangles.txt";
+
+
+struct triangle
+{
+	int num;
+	int first_len;
+	int second_len;
+	int third_len;
+	int color_num;
+};
+
+int main()
+{
+	ifstream colors_file;
+
+	colors_file.open(colors_file_name);
+	if (!colors_file.is_open())
+	{
+		cerr << colors_file_name << " didn't open\n";
+		return 1;
+	}
+	
+	int amount_of_colors = 0;
+	
+	colors_file >> amount_of_colors;
+	colors_file.ignore(std::numeric_limits<int>::max(), '\n');
+
+	int *colors_numbers = new int[amount_of_colors+1];
+	string* colors_types = new string[amount_of_colors+1];
+	for (int i = 1; i <= amount_of_colors; i++)
+	{
+		colors_file >> colors_numbers[i];
+		string loc_color_type;
+		colors_file >> loc_color_type;
+		loc_color_type += ".txt";
+		colors_types[i] = loc_color_type;
+		colors_file.ignore(std::numeric_limits<int>::max(), '\n');
+	}
+	colors_file.close();
+	
+
+	ifstream triangles_file;
+	triangles_file.open(triangles_file_name);
+	if (!triangles_file.is_open())
+	{
+		cerr << triangles_file_name << " didn't open\n";
+		return 2;
+	}
+
+	int amount_of_triangles = 0;
+	triangles_file >> amount_of_triangles;
+	triangles_file.ignore(std::numeric_limits<int>::max(), '\n');
+
+	triangle* triangles = new triangle[amount_of_triangles];
+	for (int i = 0; i <= amount_of_triangles; i++)
+	{
+		triangles_file >> triangles[i].num;
+		triangles_file >> triangles[i].first_len;
+		triangles_file >> triangles[i].second_len;
+		triangles_file >> triangles[i].third_len;
+		triangles_file >> triangles[i].color_num;
+		triangles_file.ignore(std::numeric_limits<int>::max(), '\n');
+	}
+	colors_file.close();
+		
+	
+	for (int i = 1; i <= amount_of_colors; i++)
+	{
+		ofstream color;
+		//string file = ;
+		color.open(colors_types[i]);
+		if (!color.is_open())
+		{
+			cerr << colors_types[i] << " didn't open\n";
+			return 3;
+		}
+		
+		for (int j = 0; j <= amount_of_triangles; j++)
+		{
+			if (triangles[j - 1].color_num == i)
+			{
+				color << triangles[j - 1].num << " " << triangles[j - 1].first_len << " " <<
+					triangles[j - 1].second_len << " " << triangles[j - 1].third_len << " " <<
+					triangles[j - 1].first_len + triangles[j - 1].second_len + triangles[j - 1].third_len << endl;
+			}
+		}
+		color.close();
+	}
+}
