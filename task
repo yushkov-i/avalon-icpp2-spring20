@@ -24,6 +24,10 @@ int main()
 	cin >> n;
 
 	ifstream triangles_file;
+	if (!triangles_file.is_open()) {
+		cerr << "triangle.bin did not open!";
+		return 1;
+	}
 	triangles_file.open("triangle.bin", iostream::binary);
 	triangles_file.seekg(n * triangle_size);
 	triangles_file.read(reinterpret_cast<char*>(&triangle), triangle_size);
@@ -31,4 +35,5 @@ int main()
 	
 	cout << "a: " << triangle.a << "|b: " << triangle.b << "|c: " << triangle.c << "|thickness: " << triangle.thickness;
 }
+
 
