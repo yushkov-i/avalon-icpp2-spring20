@@ -1,0 +1,64 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <limits>
+using namespace std;
+
+const string tickets_file_name = "tickets.txt";
+const string lucky_file_name = "lucky.txt";
+const string unlucky_file_name = "unlucky.txt";
+const int num_of_tickets = 1000;
+
+
+int main()
+{
+	ifstream tickets_file;
+	ofstream lucky_file;
+	ofstream unlucky_file;
+	
+	tickets_file.open(tickets_file_name);
+	lucky_file.open(lucky_file_name);
+	unlucky_file.open(unlucky_file_name);
+	
+	if (!tickets_file.is_open()) 
+	{
+		cerr << tickets_file_name << " didn't open\n";
+		return 1;
+	}
+	if (!lucky_file.is_open()) 
+	{
+		cerr << lucky_file_name << " didn't open\n";
+		return 2;
+	}
+	if (!unlucky_file.is_open()) 
+	{
+		cerr << unlucky_file_name << " didn't open\n";
+		return 3;
+	}
+
+	int num_of_lucky = 0;
+	
+	for (int i = 0; i < num_of_tickets; ++i)
+	{
+		int num = 0;
+		tickets_file >> num;
+		//cout << num << endl;;
+
+		if (num / 100000 + num / 10000 % 10 + num / 1000 % 10 == num / 100 % 10 + num / 10 % 10 + num % 10)
+		{
+			lucky_file << num << endl;
+			num_of_lucky++;
+		}
+		else
+		{
+			unlucky_file << num << endl;
+		}
+	}
+	tickets_file.close();
+	
+	cout << "lucky tickets: " << num_of_lucky << endl;
+	cout << "unlucky tickets: " << num_of_tickets - num_of_lucky << endl;
+	
+	lucky_file.close();
+	unlucky_file.close();
+}
