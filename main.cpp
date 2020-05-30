@@ -20,7 +20,7 @@ int main()
 	ifstream TrigIn;
 	TrigIn.open("triangle.bin", ios::binary);
 	Triangle triangl;
-	TrigIn.seekg(trg * sizeof(Triangle));
+	TrigIn.seekg((trg-1) * sizeof(Triangle));
 	TrigIn.read(reinterpret_cast<char*>(&triangl), sizeof(Triangle));
 	TrigIn.close();
 	cout << "Your Triangle date is : " << endl;
