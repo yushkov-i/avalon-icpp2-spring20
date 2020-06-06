@@ -21,12 +21,11 @@ int main()
 		return 1;
 	}
 	Triangle triangle;
-	input.seekg(N * TRIANGLE_SIZE);
+	input.seekg((N-1) * TRIANGLE_SIZE);
 	input.read(reinterpret_cast<char*>(&triangle), sizeof(Triangle));
 	input.close();
 	cout << "a = " << triangle.a <<
 	endl << "b = " << triangle.b << 
-	endl<< "c = " << triangle.c << 
-	endl << "thickness = " << triangle.thickness << endl;
+	endl<< "c = " << triangle.c << endl;
 }
 
