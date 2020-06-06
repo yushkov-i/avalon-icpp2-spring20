@@ -5,7 +5,7 @@ struct Triangle{
 	int a;
 	int b;
 	int c;
-	double thickness;
+	//double thickness;
 };
 
 const int TRIANGLE_SIZE = sizeof(Triangle);
